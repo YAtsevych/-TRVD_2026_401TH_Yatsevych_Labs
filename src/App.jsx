@@ -1,12 +1,13 @@
-import Main from './pages/Main/main'
-import Header from './components/Header'
+// import Main from './pages/Main/main'
+import Header from './components/Header/Header'
+import Main from './components/Main/Main'
+import Footer from './components/Footer/Footer'
 function App() {
   return (
     <>
       <Header></Header>
-      <div className="wrapper">
-        <Main></Main>
-      </div>
+      <Main></Main>
+      <Footer></Footer>
     </>
   )
 }
