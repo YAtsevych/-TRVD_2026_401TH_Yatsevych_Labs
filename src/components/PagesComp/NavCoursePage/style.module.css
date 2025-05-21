@@ -1,0 +1,23 @@
+.NavCoursePage {
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px;
+}
+.link {
+  color: #23085a;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 5px 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.link:hover {
+  color: rgb(85, 227, 69);
+  text-decoration: underline;
+}
+
+.active {
+  color: rgb(85, 227, 69);
+}
