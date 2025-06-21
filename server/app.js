@@ -17,7 +17,7 @@ app.use('/api/lessons', lessonsRoute)
 app.use('/api/lessonMain', lessonRoute)
 app.use('/api/register', apiRegistration)
 app.use('/api/apiEnglishTaskAI', apiTaskGeneration)
-app.listen(3001, () => {
-  console.log('Server started on port 3001')
-  console.log('Link: http://localhost:3001/api/')
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`)
 })
