@@ -1,7 +1,7 @@
 import { HomeSmallCardThirdSlideData } from '../../../resoures/Data/HomeCardsData'
 import { HomeSmallCardThirdSlide } from '../Main/Cards'
 import styles from './style.module.css'
-
+import React from 'react'
 const PreFooter = () => {
   return (
     <div className={styles.preFooter}>

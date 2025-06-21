@@ -5,6 +5,7 @@ import MainPages from './Pages/MainPages.jsx'
 import CoursePage from './Pages/CoursePages.jsx'
 import Registration from './Pages/Registration.jsx'
 import LessonPage from './Pages/LessonPage.jsx'
+import React from 'react'
 import ScrollToTop from './resoures/ScrollTop.jsx'
 function App() {
   return (

@@ -3,6 +3,7 @@ import LessonLink from '../LessonLink/LessonLink.jsx'
 import NavCoursePage from '../../PagesComp/NavCoursePage/NavCoursePage.jsx'
 import LinkPath from '../../LinkPath/LinkPath'
 import { useParams } from 'react-router-dom'
+import React from 'react'
 const LessonsBlock = ({ course, lessons, NavParts }) => {
   const path = useParams()
   return (

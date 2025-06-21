@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import React from 'react'
 const HomeBigCardSecondSlide = ({ data, styles }) => {
   return (
     <div className={`${styles[data.cardClass]} ${styles.secondSlideCard}`}>

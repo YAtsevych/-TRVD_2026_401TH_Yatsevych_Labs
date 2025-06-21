@@ -3,7 +3,7 @@ import Footer from '../Footer/Footer'
 import { Outlet } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-
+import React from 'react'
 const Layout = () => {
   const [pages, setPages] = useState(null)
 

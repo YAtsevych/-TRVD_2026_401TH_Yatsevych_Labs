@@ -1,5 +1,6 @@
 import styles from './style.module.css'
 import { Link } from 'react-router-dom'
+import React from 'react'
 const LessonLink = ({ data }) => {
   return (
     <>

@@ -5,6 +5,7 @@ import TasksBlock from './Tasks/TasksBlock.jsx'
 import tasksRows from '../../resoures/Data/TaskRows.js'
 import axios from 'axios'
 import { useState } from 'react'
+import React from 'react'
 import { useEffect } from 'react'
 const LessonPages = ({ lesson, tasks }) => {
   console.log(tasks)

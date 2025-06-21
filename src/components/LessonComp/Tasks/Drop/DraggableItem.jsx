@@ -1,7 +1,7 @@
 import { useDroppable } from '@dnd-kit/core'
 import { useDraggable } from '@dnd-kit/core'
 import styles from '../style.module.css'
-
+import React from 'react'
 function DraggableItem({ id, children, onClick }) {
   const { setNodeRef } = useDraggable({ id })
 

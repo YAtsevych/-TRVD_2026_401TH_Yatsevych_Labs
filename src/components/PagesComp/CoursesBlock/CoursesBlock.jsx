@@ -1,6 +1,7 @@
 import styles from './style.module.css'
 import CoursLink from '../CourseLink/CourseLink.jsx'
 import NavCoursePage from '../NavCoursePage/NavCoursePage.jsx'
+import React from 'react'
 const CoursesBlock = ({ data, courses }) => {
   return (
     <>

@@ -5,6 +5,7 @@ import ExerciseMultipleChoice from './Exercises/ExerciseMultipleChoice'
 import ExerciseWordMatching from './Exercises/ExerciseWordMatching'
 import WordPuzzle from './Exercises/WordPuzzle'
 import ShortInput from './Exercises/ShortInput'
+import React from 'react'
 const Task = ({ task }) => {
   const path = useParams()
 

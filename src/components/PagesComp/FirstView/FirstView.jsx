@@ -1,5 +1,5 @@
 import styles from './style.module.css'
-
+import React from 'react'
 const FirstView = ({ data }) => {
   const styleSpecial =
     typeof data.styleSpecial === 'string'

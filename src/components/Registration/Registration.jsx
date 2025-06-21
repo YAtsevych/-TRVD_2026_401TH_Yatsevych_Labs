@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import styles from './style.module.css'
 import { Register } from './RegistrotionFunc'
-
+import React from 'react'
 const Registration = (params) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')

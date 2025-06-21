@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import styles from './style.module.css'
-
+import React from 'react'
 const NavCoursePage = ({ data }) => {
   return (
     <>

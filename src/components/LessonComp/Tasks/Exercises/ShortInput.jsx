@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import styles from '../style.module.css'
 import { useState } from 'react'
-
+import React from 'react'
 const ShortInput = ({ task }) => {
   const path = useParams()
   const [selected, setSelected] = useState('')

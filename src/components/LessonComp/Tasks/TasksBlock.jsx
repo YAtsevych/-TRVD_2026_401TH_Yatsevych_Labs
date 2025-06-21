@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styles from './style.module.css'
 import { useParams } from 'react-router-dom'
 import Task from './Task.jsx'
+import React from 'react'
 const TasksBlock = ({ tasks }) => {
   const [activeIndex, setActiveIndex] = useState(null)
   const path = useParams()

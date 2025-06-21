@@ -1,7 +1,7 @@
 import styles from './style.module.css'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-
+import React from 'react'
 const Header = ({ pages }) => {
   if (!pages) return <div>Загрузка...</div>
   else

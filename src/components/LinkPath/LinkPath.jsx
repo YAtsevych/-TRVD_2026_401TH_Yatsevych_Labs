@@ -1,6 +1,6 @@
 import { NavLink, useParams } from 'react-router-dom'
 import styles from './style.module.css'
-
+import React from 'react'
 const generatePathArray = (params) => {
   const entries = Object.entries(params)
   let fullPath = ''
