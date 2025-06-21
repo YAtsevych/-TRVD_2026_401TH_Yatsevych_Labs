@@ -1,6 +1,7 @@
 import express from 'express'
 import conn from '../DB/db.js'
 import bcrypt from 'bcrypt'
+import { MY_LANGUAGE_ROM } from '../config.js'
 const apiRegistration = express.Router()
 
 apiRegistration.post('/', async (req, res) => {
@@ -18,7 +19,7 @@ apiRegistration.post('/', async (req, res) => {
     }
 
     const [research] = await conn.query(
-      'SELECT idUser FROM db_course_sql.users WHERE NameUser = ?;',
+      `SELECT idUser FROM ${MY_LANGUAGE_ROM.dbName}.users WHERE NameUser = ?;`,
       [email]
     )
     if (research.length > 0) {
@@ -30,7 +31,7 @@ apiRegistration.post('/', async (req, res) => {
     const passwordHashed = await bcrypt.hash(password, 10)
 
     const [result] = await conn.query(
-      'INSERT INTO users (NameUser, UserPassword) VALUES (?, ?)',
+      `INSERT INTO users (NameUser, UserPassword) VALUES (?, ?)`,
       [email, passwordHashed]
     )
     if (result.affectedRows === 0) {

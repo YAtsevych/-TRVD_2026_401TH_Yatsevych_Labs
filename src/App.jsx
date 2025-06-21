@@ -5,9 +5,11 @@ import MainPages from './Pages/MainPages.jsx'
 import CoursePage from './Pages/CoursePages.jsx'
 import Registration from './Pages/Registration.jsx'
 import LessonPage from './Pages/LessonPage.jsx'
+import ScrollToTop from './resoures/ScrollTop.jsx'
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route path="/registration" element={<Registration />} />
         <Route path="/" element={<Layout />}>

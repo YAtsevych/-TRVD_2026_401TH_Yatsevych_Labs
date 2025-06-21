@@ -1,12 +1,12 @@
 import express from 'express'
 import conn from '../DB/db.js'
-
+import { MY_LANGUAGE_ROM } from '../config.js'
 const apiPages = express.Router()
 //Запрос странички
 apiPages.get('/:slug', async (req, res) => {
   try {
     const slug = req.params.slug
-    const sql = 'SELECT * FROM db_course_sql.pages WHERE slug = ?;'
+    const sql = `SELECT * FROM ${MY_LANGUAGE_ROM.dbName}.pages WHERE slug = ?;`
 
     const [rows] = await conn.query(sql, [slug])
     res.json(rows)
@@ -17,8 +17,12 @@ apiPages.get('/:slug', async (req, res) => {
 })
 apiPages.get('/', async (req, res) => {
   try {
-    const titleHome = 'Home'
-    const sql = 'SELECT * FROM db_course_sql.pages WHERE title = ?;'
+    if (MY_LANGUAGE_ROM.dbName == 'db_courserom_sql') {
+      const titleHome = 'Acasă'
+    } else {
+      const titleHome = 'Home'
+    }
+    const sql = `SELECT * FROM ${MY_LANGUAGE_ROM.dbName}.pages WHERE title = ?;`
     const [rows] = await conn.query(sql, [titleHome])
     res.json(rows)
   } catch (err) {

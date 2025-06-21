@@ -2,7 +2,6 @@ import styles from './style.module.css'
 import CoursLink from '../CourseLink/CourseLink.jsx'
 import NavCoursePage from '../NavCoursePage/NavCoursePage.jsx'
 const CoursesBlock = ({ data, courses }) => {
-  console.log(courses)
   return (
     <>
       <div className={styles.CoursesBlock}>
