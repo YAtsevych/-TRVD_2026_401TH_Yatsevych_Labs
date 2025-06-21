@@ -13,8 +13,8 @@ const MainPages = () => {
   const { slug } = useParams()
   useEffect(() => {
     Promise.all([
-      axios.get(`/api/pages/${slug}`),
-      axios.get(`/api/courses/${slug}`),
+      axios.get(`${import.meta.env.VITE_API_URL}/api/pages/${slug}`),
+      axios.get(`${import.meta.env.VITE_API_URL}/api/courses/${slug}`),
     ])
       .then(([res1, res2]) => {
         setPage(res1.data[0])

@@ -11,8 +11,8 @@ const CoursePage = () => {
   const { slug, slug2 } = useParams()
   useEffect(() => {
     Promise.all([
-      axios.get(`/api/lessons/${slug}/${slug2}`),
-      axios.get(`/api/courses/${slug}`),
+      axios.get(`${import.meta.env.VITE_API_URL}/api/lessons/${slug}/${slug2}`),
+      axios.get(`${import.meta.env.VITE_API_URL}/api/courses/${slug}`),
     ])
       .then(([res1, res2]) => {
         setLessons(res1.data)

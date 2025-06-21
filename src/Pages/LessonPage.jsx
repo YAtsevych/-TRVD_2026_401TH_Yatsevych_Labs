@@ -12,7 +12,11 @@ const LessonPage = () => {
   const [lessonVocabular, setLessonVocabular] = useState(null)
   useEffect(() => {
     axios
-      .get(`/api/lessonMain/${slug}/${slug2}/${slug3}`)
+      .get(
+        `${
+          import.meta.env.VITE_API_URL
+        }/api/lessonMain/${slug}/${slug2}/${slug3}`
+      )
       .then((res) => {
         if (res.data.lessonVocabular) {
           setLessonVocabular(res.data.lessonVocabular)

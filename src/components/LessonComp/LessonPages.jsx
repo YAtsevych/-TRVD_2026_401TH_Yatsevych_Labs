@@ -15,7 +15,9 @@ const LessonPages = ({ lesson, tasks }) => {
     try {
       setLoading(true)
       const res = await axios.post(
-        `/api/apiEnglishTaskAI/${path.slug}/${path.slug2}/${path.slug3}`
+        `${import.meta.env.VITE_API_URL}/api/apiEnglishTaskAI/${path.slug}/${
+          path.slug2
+        }/${path.slug3}`
       )
 
       setGenaratedTasks(res.data || {})

@@ -9,7 +9,7 @@ const Layout = () => {
 
   useEffect(() => {
     axios
-      .get('/api/Header')
+      .get(`${import.meta.env.VITE_API_URL}/api/Header`)
       .then((res) => setPages(res.data))
       .catch((err) => console.error('Ошибка:', err))
   }, [])
