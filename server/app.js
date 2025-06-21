@@ -9,7 +9,12 @@ import apiRegistration from './api/apiRegistration.js'
 import apiTaskGeneration from './api/apiEnglishTaskAI.js'
 const app = express()
 app.use(cors())
-app.use(express.json())
+app.use(
+  express.json({
+    origin: 'https://your-frontend-name.onrender.com',
+    credentials: true,
+  })
+)
 app.use('/api/Header', headerRoute)
 app.use('/api/pages', pagesRoute)
 app.use('/api/courses', courseRoute)
