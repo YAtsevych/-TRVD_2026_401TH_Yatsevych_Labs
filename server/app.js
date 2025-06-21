@@ -11,7 +11,7 @@ const app = express()
 app.use(cors())
 app.use(
   express.json({
-    origin: 'https://con-dyp1.onrender.com/',
+    origin: 'https://con-dyp1.onrender.com',
     credentials: true,
   })
 )

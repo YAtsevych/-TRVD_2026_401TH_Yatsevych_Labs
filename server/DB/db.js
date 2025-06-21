@@ -1,19 +1,22 @@
-import mysql from 'mysql2/promise'
-let conn
+import pkg from 'pg'
+const { Pool } = pkg
+DATABASE_URL =
+  'postgresql://neondb_owner:npg_a3mKw9jLJlUP@ep-billowing-snowflake-a81pof5v-pooler.eastus2.azure.neon.tech/neondb?sslmode=require'
+let pool
 try {
-  conn = await mysql.createPool({
-    host: '127.0.0.1',
-    user: 'root',
-    password: '1111',
-    database: 'db_course_sql',
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0,
+  pool = new Pool({
+    connectionString: DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false, // обов’язково для Neon
+    },
   })
-  console.log('✅ Connected to MySQL database')
+
+  // Перевіряємо підключення
+  await pool.query('SELECT 1')
+  console.log('✅ Connected to PostgreSQL (Neon) database')
 } catch (err) {
-  console.error(' Failed to connect to MySQL:', err.message)
-  process.exit(1) // Завершити процес, якщо підключення неможливе
+  console.error('❌ Failed to connect to PostgreSQL:', err.message)
+  process.exit(1)
 }
 
-export default conn
+export default pool
