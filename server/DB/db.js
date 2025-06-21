@@ -1,6 +1,6 @@
 import pkg from 'pg'
 const { Pool } = pkg
-DATABASE_URL =
+const DATABASE_URL =
   'postgresql://neondb_owner:npg_a3mKw9jLJlUP@ep-billowing-snowflake-a81pof5v-pooler.eastus2.azure.neon.tech/neondb?sslmode=require'
 let pool
 try {
