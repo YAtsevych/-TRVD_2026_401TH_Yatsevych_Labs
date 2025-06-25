@@ -1,12 +1,13 @@
 import express from 'express'
-import conn from '../DB/db.js'
+import pool from '../DB/db.js' // підключення до PostgreSQL через pg
 import { MY_LANGUAGE_ROM } from '../config.js'
+
 const apiHeader = express.Router()
 
 apiHeader.get('/', async (req, res) => {
   try {
-    const sql = `SELECT idPages, title, link FROM ${MY_LANGUAGE_ROM.dbName}.pages;`
-    const [rows] = await conn.query(sql)
+    const sql = `SELECT "idPages", "title", "link" FROM pages;`
+    const { rows } = await pool.query(sql)
     res.json(rows)
   } catch (err) {
     console.error('Error fetching pages:', err)

@@ -8,8 +8,9 @@ const Layout = () => {
   const [pages, setPages] = useState(null)
 
   useEffect(() => {
+    const link = import.meta.env.VITE_API_URL
     axios
-      .get(`${import.meta.env.VITE_API_URL}/api/Header`)
+      .get(`${link}/api/Header`)
       .then((res) => setPages(res.data))
       .catch((err) => console.error('Ошибка:', err))
   }, [])

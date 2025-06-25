@@ -6,7 +6,7 @@ const apiLessons = express.Router()
 apiLessons.get('/:slug/:slug2', async (req, res) => {
   try {
     const { slug2 } = req.params
-    const sql = `SELECT c.* From ${MY_LANGUAGE_ROM.dbName}.courses m Join ${MY_LANGUAGE_ROM.dbName}.lessons c On m.idCourse = c.LessonConection where m.slug2  = ?`
+    const sql = `SELECT c.* From courses m Join lessons c On m.idCourse = c.LessonConection where m.slug2  = $1`
     const [rows] = await conn.query(sql, [slug2])
     res.json(rows)
   } catch (err) {

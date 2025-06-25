@@ -8,7 +8,7 @@ apiCourses.get('/:slug', async (req, res) => {
   try {
     const slug = req.params.slug
 
-    const sql = `SELECT a.* From ${MY_LANGUAGE_ROM.dbName}.pages m Join ${MY_LANGUAGE_ROM.dbName}.courses a On m.idPages = a.CourseConection where m.slug = ?`
+    const sql = `SELECT a.* From pages m Join courses a On m.idPages = a.CourseConection where m.slug = $1`
 
     const [rows] = await conn.query(sql, [slug])
 

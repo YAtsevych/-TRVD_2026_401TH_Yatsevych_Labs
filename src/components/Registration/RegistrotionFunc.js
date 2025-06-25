@@ -6,8 +6,8 @@ export async function Register(email, password) {
   if (password.length < 6) {
     throw new Error('Password is too short')
   }
-
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
+  const link = `${import.meta.env.VITE_API_URL}`
+  const response = await fetch(`${link}/api/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),

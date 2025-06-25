@@ -11,12 +11,9 @@ const LessonPage = () => {
   const [tasks, setTasks] = useState(null)
   const [lessonVocabular, setLessonVocabular] = useState(null)
   useEffect(() => {
+    const link = `${import.meta.env.VITE_API_URL}`
     axios
-      .get(
-        `${
-          import.meta.env.VITE_API_URL
-        }/api/lessonMain/${slug}/${slug2}/${slug3}`
-      )
+      .get(`${link}/api/lessonMain/${slug}/${slug2}/${slug3}`)
       .then((res) => {
         if (res.data.lessonVocabular) {
           setLessonVocabular(res.data.lessonVocabular)

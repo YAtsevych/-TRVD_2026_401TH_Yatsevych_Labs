@@ -10,10 +10,11 @@ import apiTaskGeneration from './api/apiEnglishTaskAI.js'
 const app = express()
 app.use(cors())
 app.use(
-  express.json({
-    origin: 'https://con-dyp1.onrender.com',
-    credentials: true,
-  })
+  // express.json({
+  //   origin: 'https://con-dyp1.onrender.com',
+  //   credentials: true,
+  // })
+  express.json()
 )
 app.use('/api/Header', headerRoute)
 app.use('/api/pages', pagesRoute)

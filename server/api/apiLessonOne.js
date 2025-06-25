@@ -8,18 +8,18 @@ apiLessonOne.get('/:slug/:slug2/:slug3', async (req, res) => {
     const slug3 = req.params.slug3
 
     //Получить урок
-    let lessonQuery = `SELECT lesson.*, rule.RuleText FROM ${MY_LANGUAGE_ROM.dbName}.lessons lesson LEFT JOIN ${MY_LANGUAGE_ROM.dbName}.rules rule ON lesson.idLesson = rule.ConnectionToLesson WHERE slug3 = ?`
+    let lessonQuery = `SELECT lesson.*, rule.RuleText FROM lessons lesson LEFT JOIN rules rule ON lesson.idLesson = rule.ConnectionToLesson WHERE slug3 = $1`
     const [lessonRows] = await conn.query(lessonQuery, [slug3])
     if (lessonRows.length === 0) {
       return res.status(404).json({ error: 'Lesson not found' })
     }
 
-    const lessonVocabularQuery = `SELECT  V.*, L.idLesson FROM ${MY_LANGUAGE_ROM.dbName}.lessons L JOIN ${MY_LANGUAGE_ROM.dbName}.lessonsvocabular LV ON L.idLesson = LV.idLesson JOIN ${MY_LANGUAGE_ROM.dbName}.dictionary V ON LV.idWord = V.idWord WHERE L.idLesson = ?;`
+    const lessonVocabularQuery = `SELECT  V.*, L.idLesson FROM lessons L JOIN lessonsvocabular LV ON L.idLesson = LV.idLesson JOIN dictionary V ON LV.idWord = V.idWord WHERE L.idLesson = $1;`
     const [lessonVocabular] = await conn.query(lessonVocabularQuery, [
       lessonRows[0].idLesson,
     ])
 
-    const tasksQuery = `SELECT * FROM ${MY_LANGUAGE_ROM.dbName}.tasks where LessonId = ?`
+    const tasksQuery = `SELECT * FROM tasks where LessonId = $1`
     const [tasksRows] = await conn.query(tasksQuery, [lessonRows[0].idLesson])
     tasksRows.forEach((task) => {
       try {
