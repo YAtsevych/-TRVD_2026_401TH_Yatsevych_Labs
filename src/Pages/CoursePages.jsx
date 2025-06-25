@@ -10,7 +10,7 @@ const CoursePage = () => {
   const [lessons, setLessons] = useState(null)
   const { slug, slug2 } = useParams()
   useEffect(() => {
-    const link = `${import.meta.env.VITE_API_URL}`
+    const link = import.meta.env.VITE_API_URL
     Promise.all([
       axios.get(`${link}/api/lessons/${slug}/${slug2}`),
       axios.get(`${link}/api/courses/${slug}`),
