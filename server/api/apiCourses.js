@@ -10,7 +10,7 @@ apiCourses.get('/:slug', async (req, res) => {
 
     const sql = `SELECT a.* From pages m Join courses a On m.idPages = a.CourseConection where m.slug = $1`
 
-    const [rows] = await conn.query(sql, [slug])
+    const { rows } = await conn.query(sql, [slug])
 
     res.json(rows)
   } catch (err) {

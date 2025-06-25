@@ -6,7 +6,7 @@ const apiHeader = express.Router()
 
 apiHeader.get('/', async (req, res) => {
   try {
-    const sql = `SELECT "idPages", "title", "link" FROM pages;`
+    const sql = `SELECT idPages, title, link FROM pages;`
     const { rows } = await pool.query(sql)
     res.json(rows)
   } catch (err) {

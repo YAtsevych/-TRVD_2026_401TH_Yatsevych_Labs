@@ -7,7 +7,7 @@ apiLessons.get('/:slug/:slug2', async (req, res) => {
   try {
     const { slug2 } = req.params
     const sql = `SELECT c.* From courses m Join lessons c On m.idCourse = c.LessonConection where m.slug2  = $1`
-    const [rows] = await conn.query(sql, [slug2])
+    const { rows } = await conn.query(sql, [slug2])
     res.json(rows)
   } catch (err) {
     console.error('Error fetching pages:', err)
