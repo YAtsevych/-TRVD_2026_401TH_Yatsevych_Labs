@@ -19,7 +19,9 @@ const MainPages = () => {
     ])
       .then(([res1, res2]) => {
         setPage(res1.data[0])
+        console.log(res1.data[0])
         setCourses(res2.data)
+        console.log(res2.data)
       })
       .catch((err) => console.error('Ошибка:', err))
   }, [slug])

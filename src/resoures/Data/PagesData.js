@@ -3,7 +3,7 @@ const PagesData = [
     id: 1,
     slug: 'home',
     title: 'Home',
-    FirstViewBackGroundImg: '/resoures/img/backgrounds/Home.jpg',
+    FirstViewBackGroundImg: '/resoures/img/backgrounds/Home.webp',
     FirstViewText:
       'Learn English online and boost your skills with our engaging tools and materials.',
     link: '/',
@@ -15,7 +15,7 @@ const PagesData = [
     id: 2,
     slug: 'vocabular',
     title: 'Vocabular',
-    FirstViewBackGroundImg: '/resoures/img/backgrounds/VocabularMain.jpg',
+    FirstViewBackGroundImg: '/resoures/img/backgrounds/VocabularMain.webp',
     FirstViewText:
       'Build your vocabulary to communicate more effectively in English.',
     link: '/vocabular',
@@ -29,7 +29,7 @@ const PagesData = [
         PartPath: '/vocabular/A1A2vocabular',
         Partdescription:
           'Are you a learner at A1 (elementary) or A2 (pre-intermediate) English level? Learn new words and practise your vocabulary.',
-        PartImgSrs: '/resoures/img/backgrounds/3.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/3.webp',
         Courses: [
           {
             idCourse: 0,
@@ -37,7 +37,7 @@ const PagesData = [
             CoursePath: '/vocabular/A1A2vocabular/Accessories',
             CourseDescription:
               'Learn vocabulary for accessories and practice using them in sentences.',
-            CourseImgSrs: '/resoures/img/backgrounds/3.jpg',
+            CourseImgSrs: '/resoures/img/backgrounds/3.webp',
           },
           {
             idCourse: 1,
@@ -45,7 +45,7 @@ const PagesData = [
             CoursePath: '/vocabular/A1A2vocabular/Accessories',
             CourseDescription:
               'Learn vocabulary for accessories and practice using them in sentences.',
-            CourseImgSrs: '/resoures/img/backgrounds/3.jpg',
+            CourseImgSrs: '/resoures/img/backgrounds/3.webp',
           },
           {
             idCourse: 2,
@@ -53,7 +53,7 @@ const PagesData = [
             CoursePath: '/vocabular/A1A2vocabular/Accessories',
             CourseDescription:
               'Learn vocabulary for accessories and practice using them in sentences.',
-            CourseImgSrs: '/resoures/img/backgrounds/3.jpg',
+            CourseImgSrs: '/resoures/img/backgrounds/3.webp',
           },
         ],
       },
@@ -64,7 +64,7 @@ const PagesData = [
         PartPath: '/vocabular/B1B2vocabular',
         Partdescription:
           'Are you learning English at B1 (intermediate) or B2 (upper-intermediate) level? Expand your vocabulary and practise using new words in context.',
-        PartImgSrs: '/resoures/img/backgrounds/5.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/5.webp',
         Courses: [],
       },
       {
@@ -74,7 +74,7 @@ const PagesData = [
         PartPath: '/vocabular/personalVocabular',
         Partdescription:
           'This is your personal vocabulary list, where you collect the words you`ve learned with us',
-        PartImgSrs: '/resoures/img/backgrounds/levelsMain.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/levelsMain.webp',
         Courses: [],
       },
     ],
@@ -83,7 +83,7 @@ const PagesData = [
     id: 3,
     slug: 'grammar',
     title: 'Grammar',
-    FirstViewBackGroundImg: '/resoures/img/backgrounds/GrammarMain.jpg',
+    FirstViewBackGroundImg: '/resoures/img/backgrounds/GrammarMain.webp',
     FirstViewText:
       'Practice grammar often to boost confidence and improve your English.',
     link: '/grammar',
@@ -98,7 +98,7 @@ const PagesData = [
         PartPath: '/grammar/A1A2grammar',
         Partdescription:
           'Are you at an A1 (beginner) or A2 (pre-intermediate) English level? In this section, you can enhance your grammar skills with easy-to-follow lessons.',
-        PartImgSrs: '/resoures/img/backgrounds/3.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/3.webp',
         Courses: [],
       },
       {
@@ -108,7 +108,7 @@ const PagesData = [
         PartPath: '/grammar/B1B2grammar',
         Partdescription:
           'Are you at a B1 (intermediate) or B2 (upper-intermediate) English level? This section will help you refine your grammar with straightforward lessons.',
-        PartImgSrs: '/resoures/img/backgrounds/5.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/5.webp',
         Courses: [],
       },
       {
@@ -118,7 +118,7 @@ const PagesData = [
         PartPath: '/grammar/C1grammar',
         Partdescription:
           'Are you at a C1 (advanced) English level? Here, you can elevate your grammar with our clear and simple lessons.',
-        PartImgSrs: '/resoures/img/backgrounds/5.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/5.webp',
         Courses: [],
       },
       {
@@ -128,7 +128,7 @@ const PagesData = [
         PartPath: '/grammar/referenceGrammar',
         Partdescription:
           'This section presents English grammar in an easy-to-understand way. You will find example sentences to illustrate how the language is used, and interactive exercises to help reinforce your learning.',
-        PartImgSrs: '/resoures/img/backgrounds/5.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/5.webp',
         Courses: [],
       },
     ],
@@ -137,7 +137,7 @@ const PagesData = [
     id: 4,
     slug: 'skills',
     title: 'Skills',
-    FirstViewBackGroundImg: '/resoures/img/backgrounds/SkillsMain.jpg',
+    FirstViewBackGroundImg: '/resoures/img/backgrounds/SkillsMain.webp',
     FirstViewText:
       'Work on your reading, writing, listening, and speaking abilities according to your current level.',
     link: '/skills',
@@ -152,7 +152,7 @@ const PagesData = [
         PartPath: '/skills/listening',
         Partdescription:
           "In this section, you'll find activities designed to enhance your listening skills. Improving your listening will help you understand the language better and improve your pronunciation.",
-        PartImgSrs: '/resoures/img/backgrounds/5.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/5.webp',
         Courses: [],
       },
       {
@@ -162,7 +162,7 @@ const PagesData = [
         PartPath: '/skills/reading',
         Partdescription:
           "In this section, you'll find activities aimed at improving your reading skills. Practising reading will help you understand the language better and expand your vocabulary.",
-        PartImgSrs: '/resoures/img/backgrounds/5.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/5.webp',
         Courses: [],
       },
       {
@@ -172,7 +172,7 @@ const PagesData = [
         PartPath: '/skills/writing',
         Partdescription:
           "Here, you can practice your writing skills. By studying model texts and their structure, you'll learn how to improve your own writing.",
-        PartImgSrs: '/resoures/img/backgrounds/5.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/5.webp',
         Courses: [],
       },
       {
@@ -182,7 +182,7 @@ const PagesData = [
         PartPath: '/skills/speaking',
         Partdescription:
           "In this section, you can work on your speaking skills. By paying attention to the language used in various situations and practising key phrases, you'll improve your ability to speak confidently.",
-        PartImgSrs: '/resoures/img/backgrounds/5.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/5.webp',
         Courses: [],
       },
     ],
@@ -191,7 +191,7 @@ const PagesData = [
     id: 5,
     slug: 'special',
     title: 'Special language',
-    FirstViewBackGroundImg: '/resoures/img/backgrounds/SpecialMain.jpg',
+    FirstViewBackGroundImg: '/resoures/img/backgrounds/SpecialMain.webp',
     FirstViewText:
       'Improve your workplace English to work better and grow your career.',
     link: '/special',
@@ -206,7 +206,7 @@ const PagesData = [
         PartPath: '/specialLanguage/englishForEmails',
         Partdescription:
           'Do you need to write emails in English at work? Explore our lessons tailored for pre-intermediate and intermediate learners to help you improve your email writing skills.',
-        PartImgSrs: '/resoures/img/backgrounds/5.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/5.webp',
         Courses: [],
       },
       {
@@ -216,7 +216,7 @@ const PagesData = [
         PartPath: '/specialLanguage/youreHired',
         Partdescription:
           'Are you job hunting or hiring new staff? Watch our video series designed for intermediate and upper-intermediate learners to enhance your job-related language skills.',
-        PartImgSrs: '/resoures/img/backgrounds/5.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/5.webp',
         Courses: [],
       },
       {
@@ -226,7 +226,7 @@ const PagesData = [
         PartPath: '/specialLanguage/changeManagement',
         Partdescription:
           'Listen to a consultant discuss the basic stages of the change process and the roles of people in a change management team, designed to help learners understand this business concept.',
-        PartImgSrs: '/resoures/img/backgrounds/5.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/5.webp',
         Courses: [],
       },
     ],
@@ -235,7 +235,7 @@ const PagesData = [
     id: 6,
     slug: 'general',
     title: 'General',
-    FirstViewBackGroundImg: '/resoures/img/backgrounds/GeneralMain.jpg',
+    FirstViewBackGroundImg: '/resoures/img/backgrounds/GeneralMain.webp',
     FirstViewText:
       'Look for additional listening and reading exercises to help boost your English skills and practice language useful for daily life.',
     link: '/general',
@@ -248,7 +248,7 @@ const PagesData = [
     id: 7,
     slug: 'levels',
     title: 'Levels',
-    FirstViewBackGroundImg: '/resoures/img/backgrounds/levelsMain.jpg',
+    FirstViewBackGroundImg: '/resoures/img/backgrounds/levelsMain.webp',
     FirstViewText:
       'Learn about the various CEFR English levels and try a free test to discover your current level.',
     link: '/levels',
@@ -263,7 +263,7 @@ const PagesData = [
         PartPath: '/levels/onlineEnglishLevelTest',
         Partdescription:
           'This free online level test will give you an approximate indication of the English level you are working towards or completing.',
-        PartImgSrs: '/resoures/img/backgrounds/5.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/5.webp',
         Courses: [],
       },
       {
@@ -272,7 +272,7 @@ const PagesData = [
         slug2: 'resourcesForYourLevel',
         PartPath: '/levels/resourcesForYourLevel',
         Partdescription: 'Find learning materials at your English level.',
-        PartImgSrs: '/resoures/img/backgrounds/5.jpg',
+        PartImgSrs: '/resoures/img/backgrounds/5.webp',
         Courses: [],
       },
     ],
