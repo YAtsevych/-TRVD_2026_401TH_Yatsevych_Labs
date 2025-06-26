@@ -15,7 +15,7 @@ const HomeCardsData = [
     link: '/vocabular',
     imgClass: 'secondSlideCardImg',
     cardClass: 'firstCard',
-    cardImgSrc: '/resoures/img/backgrounds/vocabularImg1.jpg',
+    cardImgSrc: '/resoures/img/backgrounds/vocabularImg1.webp',
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ const HomeCardsData = [
     link: '/grammar',
     imgClass: 'secondSlideCardImg',
     cardClass: 'secondCard',
-    cardImgSrc: '/resoures/img/backgrounds/GrammarImg1.jpg',
+    cardImgSrc: '/resoures/img/backgrounds/GrammarImg1.webp',
   },
   {
     id: 3,
@@ -50,7 +50,7 @@ const HomeCardsData = [
     link: '/skills',
     imgClass: 'secondSlideCardImg',
     cardClass: 'thirdCard',
-    cardImgSrc: '/resoures/img/backgrounds/SkillsMain.jpg',
+    cardImgSrc: '/resoures/img/backgrounds/SkillsMain.webp',
   },
 ]
 const HomeSmallCardThirdSlideData = [

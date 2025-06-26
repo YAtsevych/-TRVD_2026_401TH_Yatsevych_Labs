@@ -31,6 +31,7 @@ const MainPages = () => {
       {page ? (
         <React.Fragment>
           <FirstView data={page} />
+          {/* ожидается обьект страницы */}
           <CoursesBlock data={page} courses={courses} />
           <PreFooter />
         </React.Fragment>

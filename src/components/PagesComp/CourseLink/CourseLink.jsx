@@ -5,22 +5,22 @@ const CourseLink = ({ data }) => {
   return (
     <>
       <div className={styles.CourseLink}>
-        <Link to={data.CourseLink}>
+        <Link to={data.courselink}>
           <div
             className={styles.CourseLinkImg}
             style={{
-              backgroundImage: `url(${data.CourseImgSrs})`,
+              backgroundImage: `url(${data.courseimgsrs})`,
             }}
           ></div>
         </Link>
         <div className={styles.CourseLinkTexts}>
           <div className={styles.CourseLinkTitle}>
-            <Link key={data.idCourse} to={data.CourseLink}>
-              <h3>{data.CourseTitle}</h3>
+            <Link key={data.idcourse} to={data.courselink}>
+              <h3>{data.coursetitle}</h3>
             </Link>
           </div>
-          <div className={styles.CourseLinkDescription}>
-            {data.CourseDescription}
+          <div className={styles.courselinkdescription}>
+            {data.coursedescription}
           </div>
         </div>
       </div>

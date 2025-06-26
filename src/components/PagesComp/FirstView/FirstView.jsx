@@ -2,14 +2,14 @@ import styles from './style.module.css'
 import React from 'react'
 const FirstView = ({ data }) => {
   const styleSpecial =
-    typeof data.styleSpecial === 'string'
-      ? JSON.parse(data.styleSpecial)
-      : data.styleSpecial || {}
+    typeof data.stylespecial === 'string'
+      ? JSON.parse(data.stylespecial)
+      : data.stylespecial || {}
   return (
     <div
       className={styles.firstSlide}
       style={{
-        backgroundImage: `url(${data.FirstViewBackGroundImg})`,
+        backgroundImage: `url(${data.firstviewbackgroundimg})`,
         ...styleSpecial,
       }}
     >
@@ -20,7 +20,7 @@ const FirstView = ({ data }) => {
           className={styles.logo}
         />
         <h3>{data.title}</h3>
-        {data.FirstViewText}
+        {data.firstviewtext}
       </div>
     </div>
   )

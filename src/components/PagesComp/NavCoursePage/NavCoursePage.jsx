@@ -8,13 +8,13 @@ const NavCoursePage = ({ data }) => {
         {data.map((li) => {
           return (
             <NavLink
-              key={li.idCourse}
-              to={li.CourseLink}
+              key={li.idcourse}
+              to={li.courselink}
               className={({ isActive }) =>
                 isActive ? `${styles.link} ${styles.active}` : styles.link
               }
             >
-              {li.CourseTitle}
+              {li.coursetitle}
             </NavLink>
           )
         })}

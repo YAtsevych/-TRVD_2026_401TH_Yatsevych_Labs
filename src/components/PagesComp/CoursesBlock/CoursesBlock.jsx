@@ -11,12 +11,12 @@ const CoursesBlock = ({ data, courses }) => {
             <div className={styles.CoursesBlockFirstColumn}>
               <div
                 className={styles.CoursesBlockFirstColumnTitle}
-                dangerouslySetInnerHTML={{ __html: data.descriptionPages }}
+                dangerouslySetInnerHTML={{ __html: data.descriptionpages }}
               ></div>
               <div className={styles.CoursesBlockFirstColumnLinks}>
                 {courses.map((link) => {
-                  if (link.idCourse !== 0)
-                    return <CoursLink key={link.idCourse} data={link} />
+                  if (link.idcourse !== 0)
+                    return <CoursLink key={link.idcourse} data={link} />
                 })}
               </div>
             </div>
