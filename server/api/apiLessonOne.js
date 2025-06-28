@@ -24,7 +24,7 @@ apiLessonOne.get('/:slug/:slug2/:slug3', async (req, res) => {
     const [tasksRows] = await conn.query(tasksQuery, [lessonRows[0].idlesson])
     tasksRows.forEach((task) => {
       try {
-        task.options = JSON.parse(task.Options)
+        task.options = JSON.parse(task.options)
       } catch (err) {
         console.error(
           `Помилка парсингу Options для task ID ${task.idtask}:`,
