@@ -17,24 +17,24 @@ apiLessonOne.get('/:slug/:slug2/:slug3', async (req, res) => {
 
     const lessonVocabularQuery = `SELECT  V.*, L.idlesson FROM lessons L JOIN lessonsvocabular LV ON L.idlesson = LV.idlesson JOIN dictionary V ON LV.idword = V.idword WHERE L.idlesson = $1;`
     const [lessonVocabular] = await conn.query(lessonVocabularQuery, [
-      lessonRows[0].idLesson,
+      lessonRows[0].idlesson,
     ])
 
-    const tasksQuery = `SELECT * FROM tasks where LessonId = $1`
-    const [tasksRows] = await conn.query(tasksQuery, [lessonRows[0].idLesson])
+    const tasksQuery = `SELECT * FROM tasks where lessonid = $1`
+    const [tasksRows] = await conn.query(tasksQuery, [lessonRows[0].idlesson])
     tasksRows.forEach((task) => {
       try {
-        task.Options = JSON.parse(task.Options)
+        task.options = JSON.parse(task.Options)
       } catch (err) {
         console.error(
-          `Помилка парсингу Options для task ID ${task.idTask}:`,
+          `Помилка парсингу Options для task ID ${task.idtask}:`,
           err
         )
-        task.Options = []
+        task.options = []
       }
     })
     const GroupdTask = tasksRows.reduce((acc, task) => {
-      const key = task.TaskType
+      const key = task.tasktype
       if (!acc[key]) {
         acc[key] = []
       }
