@@ -8,13 +8,14 @@ apiLessonOne.get('/:slug/:slug2/:slug3', async (req, res) => {
     const slug3 = req.params.slug3
 
     //Получить урок
-    let lessonQuery = `SELECT lesson.*, rule.RuleText FROM lessons lesson LEFT JOIN rules rule ON lesson.idLesson = rule.ConnectionToLesson WHERE slug3 = $1`
+    let lessonQuery = `SELECT
+    lesson.*, rule.ruletext FROM lessons lesson LEFT JOIN rules rule ON lesson.idlesson = rule.connectiontolesson WHERE slug3 = $1;`
     const [lessonRows] = await conn.query(lessonQuery, [slug3])
     if (lessonRows.length === 0) {
       return res.status(404).json({ error: 'Lesson not found' })
     }
 
-    const lessonVocabularQuery = `SELECT  V.*, L.idLesson FROM lessons L JOIN lessonsvocabular LV ON L.idLesson = LV.idLesson JOIN dictionary V ON LV.idWord = V.idWord WHERE L.idLesson = $1;`
+    const lessonVocabularQuery = `SELECT  V.*, L.idlesson FROM lessons L JOIN lessonsvocabular LV ON L.idlesson = LV.idlesson JOIN dictionary V ON LV.idword = V.idword WHERE L.idlesson = $1;`
     const [lessonVocabular] = await conn.query(lessonVocabularQuery, [
       lessonRows[0].idLesson,
     ])
