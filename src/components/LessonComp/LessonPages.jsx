@@ -40,18 +40,18 @@ const LessonPages = ({ lesson, tasks }) => {
             <div className={styles.LessonPageFirstColumn}>
               <div className={styles.LessonPageFirstColumnTitle}>
                 <LinkPath {...path} />
-                <h1>{lesson.LessonTitle}</h1>
+                <h1>{lesson.lessontitle}</h1>
               </div>
               <div
                 className={styles.LessonPageFirstColumnDescription}
                 dangerouslySetInnerHTML={{
-                  __html: lesson.LessonDescription,
+                  __html: lesson.lessondescription,
                 }}
               ></div>
               <div
                 className={styles.LessonPageFirstColumnDescription}
                 dangerouslySetInnerHTML={{
-                  __html: lesson.RuleText,
+                  __html: lesson.ruletext,
                 }}
               ></div>
 

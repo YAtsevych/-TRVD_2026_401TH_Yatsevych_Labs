@@ -13,8 +13,8 @@ const ExerciseWordMatching = ({ task }) => {
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0)
 
   const currentTask = task[1][taskNumber]
-  const correctAnswers = currentTask.CorrectAnswer.Answers
-  const correctOptions = currentTask.CorrectAnswer.CorrectOption
+  const correctAnswers = currentTask.correctanswer.answers
+  const correctOptions = currentTask.correctanswer.correctoption
   const options = currentTask.Options
 
   const isOptionUsed = (option) => Object.values(assigned).includes(option)
@@ -83,7 +83,7 @@ const ExerciseWordMatching = ({ task }) => {
       </div>
 
       <div className={styles.TaskBlockCardDescription}>
-        <span>{currentTask.TaskDescription}</span>
+        <span>{currentTask.taskdescription}</span>
         <span>{remainder} items remaining</span>
         <span style={{ marginLeft: '15px' }}>
           ✅ Correct answers: {correctAnswersCount}
@@ -92,7 +92,7 @@ const ExerciseWordMatching = ({ task }) => {
 
       <div
         className={styles.TaskBlockCardQueshion}
-        dangerouslySetInnerHTML={{ __html: currentTask.TaskText }}
+        dangerouslySetInnerHTML={{ __html: currentTask.tasktext }}
       ></div>
 
       <div

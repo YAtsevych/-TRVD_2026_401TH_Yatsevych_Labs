@@ -20,7 +20,7 @@ const LinkPath = (params) => {
     <div className={styles.path}>
       {pathArray.map((link, index) => (
         <div key={index}>
-          <NavLink to={link.path} className={styles.pathLink}>
+          <NavLink to={link.path} className={styles.pathlink}>
             {link.title}
           </NavLink>
           <span>{' > '}</span>

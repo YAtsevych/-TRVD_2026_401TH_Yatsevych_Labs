@@ -15,14 +15,14 @@ const LessonPage = () => {
     axios
       .get(`${link}/api/lessonMain/${slug}/${slug2}/${slug3}`)
       .then((res) => {
-        if (res.data.lessonVocabular) {
-          setLessonVocabular(res.data.lessonVocabular)
+        if (res.data.lessonvocabular) {
+          setLessonVocabular(res.data.lessonvocabular)
         }
         setLesson(res.data.lesson)
         console.log(lesson)
-        if (res.data.lessonVocabular && res.data.lessonVocabular.length !== 0) {
+        if (res.data.lessonvocabular && res.data.lessonvocabular.length !== 0) {
           setTasks(
-            CreateExerciseForVocabular(res.data.lessonVocabular, res.data.tasks)
+            CreateExerciseForVocabular(res.data.lessonvocabular, res.data.tasks)
           )
         } else {
           setTasks(res.data.tasks)

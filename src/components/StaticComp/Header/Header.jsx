@@ -25,7 +25,7 @@ const Header = ({ pages }) => {
         <div className={styles.headerNavBottom}>
           {pages.map((card) => (
             <Link
-              key={card.idPages}
+              key={card.idpages}
               to={card.link}
               className={styles.headerNavBottomItem}
             >

@@ -14,14 +14,14 @@ const LessonsBlock = ({ course, lessons, NavParts }) => {
             <div className={styles.LessonBlockFirstColumn}>
               <div className={styles.LessonBlockFirstColumnTitle}>
                 <LinkPath {...path} />
-                <h1>{course.CourseTitle}</h1>
+                <h1>{course.coursetitle}</h1>
               </div>
               <div className={styles.LessonBlockFirstColumnPreviewImage}>
-                <img src={course.CourseImgSrs} />
+                <img src={course.courseimgsrs} />
               </div>
               <div
                 className={styles.LessonBlockFirstColumnDescription}
-                dangerouslySetInnerHTML={{ __html: course.CourseDescription }}
+                dangerouslySetInnerHTML={{ __html: course.coursedescription }}
               ></div>
               <div className={styles.LessonBlockFirstColumnTitle}>
                 <h1>Choose a lesson</h1>
@@ -29,7 +29,7 @@ const LessonsBlock = ({ course, lessons, NavParts }) => {
               <div className={styles.LessonBlockFirstColumnLinks}>
                 {lessons &&
                   lessons.map((link) => (
-                    <LessonLink key={link.idLesson} data={link} />
+                    <LessonLink key={link.idlesson} data={link} />
                   ))}
               </div>
             </div>

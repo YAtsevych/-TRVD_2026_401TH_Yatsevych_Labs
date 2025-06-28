@@ -16,7 +16,7 @@ const ExerciseMultipleChoice = ({ task }) => {
 
   const handSubmit = () => {
     setSubmitted(true)
-    if (selected === task[1][taskNumber].CorrectAnswer) {
+    if (selected === task[1][taskNumber].correctanswer) {
       setCorrectAnswersCount((prev) => prev + 1)
     }
   }
@@ -49,7 +49,7 @@ const ExerciseMultipleChoice = ({ task }) => {
       </div>
 
       <div className={styles.TaskBlockCardDescription}>
-        <span>{task[1][taskNumber].TaskDescription}</span>
+        <span>{task[1][taskNumber].taskdescription}</span>
         <span>{remainder} items remaining</span>
         <span style={{ marginLeft: '15px' }}>
           ✅ Correct answers: {CorrectAnswersCount}
@@ -58,11 +58,11 @@ const ExerciseMultipleChoice = ({ task }) => {
 
       <div
         className={styles.TaskBlockCardQueshion}
-        dangerouslySetInnerHTML={{ __html: task[1][taskNumber].TaskText }}
+        dangerouslySetInnerHTML={{ __html: task[1][taskNumber].tasktext }}
       ></div>
 
       <div className={styles.TaskBlockCardAnswers}>
-        {task[1][taskNumber].Options.map((option, index) => (
+        {task[1][taskNumber].options.map((option, index) => (
           <button
             className={`${styles.TaskBlockOptionButton} ${
               active === index ? styles.TaskBlockOptionButtonActive : ''
@@ -81,13 +81,13 @@ const ExerciseMultipleChoice = ({ task }) => {
         {/* Результат перевірки */}
         {submitted && (
           <div>
-            {selected === task[1][taskNumber].CorrectAnswer ? (
+            {selected === task[1][taskNumber].correctanswer ? (
               <span>Correct!</span>
             ) : (
               <span>
                 Incorrect. Correct answer {'  "'}
                 <span style={{ fontWeight: 'bold' }}>
-                  {task[1][taskNumber].CorrectAnswer}
+                  {task[1][taskNumber].correctanswer}
                 </span>
                 {'"'}
               </span>
@@ -109,7 +109,7 @@ const ExerciseMultipleChoice = ({ task }) => {
           <div className={styles.TaskBlockExplanation}>
             <span
               dangerouslySetInnerHTML={{
-                __html: task[1][taskNumber].Explanation,
+                __html: task[1][taskNumber].explanation,
               }}
             ></span>
           </div>
@@ -140,7 +140,7 @@ const ExerciseMultipleChoice = ({ task }) => {
           {clicked ? (remainder === 0 ? 'Done' : 'Next') : 'Check'}
         </button>
 
-        {task[1][taskNumber].Explanation !== '' && (
+        {task[1][taskNumber].explanation !== '' && (
           <button
             className={styles.TaskBlockNavButton}
             onClick={() => setHint((prev) => !prev)}

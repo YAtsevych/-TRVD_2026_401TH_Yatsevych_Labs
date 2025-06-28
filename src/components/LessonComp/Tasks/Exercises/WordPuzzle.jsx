@@ -14,13 +14,13 @@ const WordPuzzle = ({ task }) => {
   const [correctAnswerShow, setCorrectAnswerShow] = useState(false)
   const currentTask = task[1][taskNumber]
   let correct
-  if (typeof currentTask.CorrectAnswer == 'string') {
-    correct = currentTask.CorrectAnswer.split(' ')
+  if (typeof currentTask.correctanswer == 'string') {
+    correct = currentTask.correctanswer.split(' ')
   } else {
-    correct = currentTask.CorrectAnswer
+    correct = currentTask.correctanswer
   }
 
-  const options = currentTask.Options
+  const options = currentTask.options
 
   const isAllCorrect = () =>
     correct.every((letter, index) => assigned[index] === letter)
@@ -107,7 +107,7 @@ const WordPuzzle = ({ task }) => {
       </div>
 
       <div className={styles.TaskBlockCardDescription}>
-        <span>{currentTask.TaskDescription}</span>
+        <span>{currentTask.taskdescription}</span>
         <span>{remainder} items remaining</span>
         <span style={{ marginLeft: '15px' }}>
           ✅ Correct answers: {correctAnswersCount}
@@ -117,7 +117,7 @@ const WordPuzzle = ({ task }) => {
       <div className={styles.TaskBlockCardQueshion}>
         Make the correct expression: <br></br>
         <strong>
-          <em dangerouslySetInnerHTML={{ __html: currentTask.TaskText }}></em>
+          <em dangerouslySetInnerHTML={{ __html: currentTask.tasktext }}></em>
         </strong>
       </div>
 
@@ -201,7 +201,7 @@ const WordPuzzle = ({ task }) => {
           <span>
             Incorrect. Correct answer{'  "'}
             <span style={{ fontWeight: 'bold' }}>
-              {task[1][taskNumber].CorrectAnswer}
+              {task[1][taskNumber].correctanswer}
             </span>
             {'"'}
           </span>

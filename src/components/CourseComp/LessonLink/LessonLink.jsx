@@ -5,22 +5,22 @@ const LessonLink = ({ data }) => {
   return (
     <>
       <div className={styles.LessonLink}>
-        <Link to={data.LessonLink}>
+        <Link to={data.lessonlink}>
           <div
             className={styles.LessonLinkImg}
             style={{
-              backgroundImage: `url(${data.LessonImgSrs})`,
+              backgroundImage: `url(${data.lessonimgsrs})`,
             }}
           ></div>
         </Link>
         <div className={styles.LessonLinkTexts}>
           <div className={styles.LessonLinkTitle}>
-            <Link key={data.idLesson} to={data.LessonLink}>
-              <h3>{data.LessonTitle}</h3>
+            <Link key={data.idlesson} to={data.lessonlink}>
+              <h3>{data.lessontitle}</h3>
             </Link>
           </div>
           <div className={styles.LessonLinkDescription}>
-            {data.LessonDescription}
+            {data.lessondescription}
           </div>
         </div>
       </div>

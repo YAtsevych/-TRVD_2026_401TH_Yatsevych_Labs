@@ -24,21 +24,21 @@ export default function CreateExerciseForVocabular(lessonVocabular, tasks) {
 
       used.add(key)
       candidates.push({
-        LessonId: vocab.idLesson,
-        TaskType: 'MultipleChoice',
-        TaskText:
+        lessonid: vocab.idlesson,
+        tasktype: 'MultipleChoice',
+        tasktext:
           lang === 'ru'
             ? 'Chose the correct translation: <strong><em>' +
               vocab.Word +
               '</em></strong> (' +
               vocab.Transcription +
               ')'
-            : 'Chose the correct translation: ' + vocab.Translation,
-        CorrectAnswer: vocab[direction],
-        Options: createRandomOptionsMultipleChoice(i, lessonVocabular, lang),
-        Explanation: '',
-        TaskDescription: 'Choose only one correct answer.',
-        TaskTitle: 'Odd one out',
+            : 'Chose the correct translation: ' + vocab.translation,
+        torrectanswer: vocab[direction],
+        options: createRandomOptionsMultipleChoice(i, lessonvocabular, lang),
+        explanation: '',
+        taskdescription: 'Choose only one correct answer.',
+        tasktitle: 'Odd one out',
       })
     }
 
@@ -72,17 +72,17 @@ export default function CreateExerciseForVocabular(lessonVocabular, tasks) {
     const vocab = lessonVocabular[i]
     if (!vocab.Word || wpUsed.has(vocab.Word)) continue
 
-    wpUsed.add(vocab.Word)
-    const AnswerArray = vocab.Word.split('')
+    wpUsed.add(vocab.word)
+    const AnswerArray = vocab.word.split('')
     tasks.WordPuzzle.push({
-      LessonId: vocab.idLesson,
-      TaskType: 'WordPuzzle',
-      TaskText: vocab.Translation,
-      CorrectAnswer: AnswerArray,
-      Options: [...AnswerArray].sort(() => Math.random() - 0.5),
-      Explanation: '',
-      TaskDescription: 'Collect the correct word or sentence.',
-      TaskTitle: 'Word Puzzle',
+      lessonid: vocab.idlesson,
+      tasktype: 'WordPuzzle',
+      tasktext: vocab.translation,
+      correctanswer: AnswerArray,
+      options: [...AnswerArray].sort(() => Math.random() - 0.5),
+      explanation: '',
+      taskdescription: 'Collect the correct word or sentence.',
+      tasktitle: 'Word Puzzle',
     })
   }
 
@@ -94,18 +94,18 @@ export default function CreateExerciseForVocabular(lessonVocabular, tasks) {
     tries++
     const i = Math.floor(Math.random() * lessonVocabular.length)
     const vocab = lessonVocabular[i]
-    if (!vocab.Word || siUsed.has(vocab.Word)) continue
+    if (!vocab.word || siUsed.has(vocab.word)) continue
 
-    siUsed.add(vocab.Word)
+    siUsed.add(vocab.word)
     tasks.ShortInput.push({
-      LessonId: vocab.idLesson,
-      TaskType: 'ShortInput',
-      TaskText: 'Write the translation of the word:',
-      CorrectAnswer: vocab.Word,
-      Options: vocab.Translation,
-      Explanation: '',
-      TaskDescription: 'Write it correctly.',
-      TaskTitle: 'Short Input',
+      lessonid: vocab.idlesson,
+      tasktype: 'ShortInput',
+      tasktext: 'Write the translation of the word:',
+      correctanswer: vocab.word,
+      options: vocab.translation,
+      explanation: '',
+      taskdescription: 'Write it correctly.',
+      tasktitle: 'Short Input',
     })
   }
 
@@ -121,14 +121,14 @@ function generateWordMatchingTask(lessonVocabular, language, usedSet) {
   if (CorrectOption.length === 0) return null
 
   return {
-    LessonId: lessonVocabular[0].idLesson,
-    TaskType: 'WordMatching',
-    TaskText: 'Match the word and translation:',
-    CorrectAnswer: { CorrectOption, Answers },
-    Options: TaskOption,
-    Explanation: '',
-    TaskDescription: 'Match the pairs.',
-    TaskTitle: 'Word Matching',
+    lessonid: lessonVocabular[0].idlesson,
+    tasktype: 'WordMatching',
+    tasktext: 'Match the word and translation:',
+    correctanswer: { CorrectOption, Answers },
+    options: TaskOption,
+    explanation: '',
+    taskdescription: 'Match the pairs.',
+    tasktitle: 'Word Matching',
   }
 }
 
@@ -142,8 +142,8 @@ function createRandomOptionsMultipleChoice(
   // 1. Додаємо правильну відповідь
   const correctAnswer =
     language === 'ru'
-      ? lessonVocabular[CorrectAnswerNumber].Translation
-      : lessonVocabular[CorrectAnswerNumber].Word
+      ? lessonVocabular[CorrectAnswerNumber].translation
+      : lessonVocabular[CorrectAnswerNumber].word
 
   options.add(correctAnswer)
 
@@ -152,8 +152,8 @@ function createRandomOptionsMultipleChoice(
     const rn = Math.floor(Math.random() * lessonVocabular.length)
     const candidate =
       language === 'ru'
-        ? lessonVocabular[rn].Translation
-        : lessonVocabular[rn].Word
+        ? lessonVocabular[rn].translation
+        : lessonVocabular[rn].word
 
     options.add(candidate)
   }
@@ -176,8 +176,8 @@ function createRandomOptionsWordMatching(lessonVocabular, language, usedSet) {
     const i = Math.floor(Math.random() * lessonVocabular.length)
     const wordObj = lessonVocabular[i]
 
-    const word = language === 'ru' ? wordObj.Translation : wordObj.Word
-    const answer = language === 'ru' ? wordObj.Word : wordObj.Translation
+    const word = language === 'ru' ? wordObj.translation : wordObj.word
+    const answer = language === 'ru' ? wordObj.word : wordObj.translation
 
     if (!word || !answer || usedSet.has(word)) continue
 

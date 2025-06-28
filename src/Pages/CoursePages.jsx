@@ -30,7 +30,7 @@ const CoursePage = () => {
         courses.map((course) => {
           if (courseSlug === course.slug2) {
             return (
-              <React.Fragment key={course.idCourse}>
+              <React.Fragment key={course.idсourse}>
                 <LessonsBlock
                   course={course}
                   lessons={lessons}

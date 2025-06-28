@@ -50,7 +50,7 @@ const ShortInput = ({ task }) => {
       </div>
       {/* Описание задания + счет ответов */}
       <div className={styles.TaskBlockCardDescription}>
-        <span>{task[1][taskNumber].TaskDescription}</span>
+        <span>{task[1][taskNumber].taskdescription}</span>
         <span>{remainder} items remaining</span>
         <span style={{ marginLeft: '15px' }}>
           ✅ Correct answers: {CorrectAnswersCount}
@@ -59,7 +59,7 @@ const ShortInput = ({ task }) => {
       {/* Текст вопроса */}
       <div
         className={styles.TaskBlockCardQueshion}
-        dangerouslySetInnerHTML={{ __html: task[1][taskNumber].TaskText }}
+        dangerouslySetInnerHTML={{ __html: task[1][taskNumber].tasktext }}
       ></div>
 
       {/* Варианты ответа или поля ввода */}
@@ -73,7 +73,7 @@ const ShortInput = ({ task }) => {
             fontSize: '20px',
           }}
         >
-          {task[1][taskNumber].Options}
+          {task[1][taskNumber].options}
         </div>
         {/* Input для ввода перевода */}
 
@@ -88,13 +88,13 @@ const ShortInput = ({ task }) => {
         {/* Результат перевірки */}
         {submitted && (
           <div>
-            {selected === task[1][taskNumber].CorrectAnswer ? (
+            {selected === task[1][taskNumber].correctanswer ? (
               <span>Correct!</span>
             ) : (
               <span>
                 Incorrect. Correct answer {'  "'}
                 <span style={{ fontWeight: 'bold' }}>
-                  {task[1][taskNumber].CorrectAnswer}
+                  {task[1][taskNumber].correctanswer}
                 </span>
                 {'"'}
               </span>
@@ -116,7 +116,7 @@ const ShortInput = ({ task }) => {
           <div className={styles.TaskBlockExplanation}>
             <span
               dangerouslySetInnerHTML={{
-                __html: task[1][taskNumber].Explanation,
+                __html: task[1][taskNumber].explanation,
               }}
             ></span>
           </div>
@@ -149,7 +149,7 @@ const ShortInput = ({ task }) => {
         </button>
 
         {/* Кнопка показа помощи */}
-        {task[1][taskNumber].Explanation !== '' && (
+        {task[1][taskNumber].explanation !== '' && (
           <button
             className={styles.TaskBlockNavButton}
             onClick={() => setHint((prev) => !prev)}
