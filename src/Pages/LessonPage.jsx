@@ -7,7 +7,7 @@ import axios from 'axios'
 import CreateExerciseForVocabular from '../resoures/CreateExerciseForVocabular'
 const LessonPage = () => {
   const { slug, slug2, slug3 } = useParams()
-  const [lesson, setLesson] = useState(null)
+  const [lessond, setLesson] = useState(null)
   const [tasks, setTasks] = useState(null)
   const [lessonVocabular, setLessonVocabular] = useState(null)
   useEffect(() => {
@@ -15,14 +15,14 @@ const LessonPage = () => {
     axios
       .get(`${link}/api/lessonMain/${slug}/${slug2}/${slug3}`)
       .then((res) => {
-        if (res.data.lessonvocabular) {
-          setLessonVocabular(res.data.lessonvocabular)
+        if (res.data.lessonVocabular) {
+          setLessonVocabular(res.data.lessonVocabular)
         }
         setLesson(res.data.lesson)
-        console.log(lesson)
-        if (res.data.lessonvocabular && res.data.lessonvocabular.length !== 0) {
+
+        if (res.data.lessonVocabular && slug == 'vocabular') {
           setTasks(
-            CreateExerciseForVocabular(res.data.lessonvocabular, res.data.tasks)
+            CreateExerciseForVocabular(res.data.lessonVocabular, res.data.tasks)
           )
         } else {
           setTasks(res.data.tasks)
@@ -33,7 +33,7 @@ const LessonPage = () => {
 
   return (
     <>
-      <LessonPages lesson={lesson} tasks={tasks}></LessonPages>
+      <LessonPages lesson={lessond} tasks={tasks}></LessonPages>
       <PreFooter></PreFooter>
     </>
   )

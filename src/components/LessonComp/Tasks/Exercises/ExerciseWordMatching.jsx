@@ -2,46 +2,42 @@ import { useParams } from 'react-router-dom'
 import styles from '../style.module.css'
 import { useState } from 'react'
 import React from 'react'
+import { DraggableItem, DropZone } from '../Drop/DraggableItem' // путь скорректируй под свой
+
 const ExerciseWordMatching = ({ task }) => {
   const path = useParams()
   const [submitted, setSubmitted] = useState(false)
   const [clicked, setClicked] = useState(false)
   const [taskNumber, setTaskNumber] = useState(0)
-  const [remainder, setRemainder] = useState(task[1].length - 1)
+  const [remainder, setRemainder] = useState(task?.[1]?.length - 1 || 0)
   const [assigned, setAssigned] = useState({})
-  const [selectedOption, setSelectedOption] = useState(null)
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0)
 
-  const currentTask = task[1][taskNumber]
-  const correctAnswers = currentTask.correctanswer.answers
-  const correctOptions = currentTask.correctanswer.correctoption
-  const options = currentTask.Options
+  const currentTask = task?.[1]?.[taskNumber]
+  if (!currentTask) return <div>Задача отсутствует</div>
 
-  const isOptionUsed = (option) => Object.values(assigned).includes(option)
+  const correctAnswers = currentTask.correctanswer?.Answers || []
+  const correctOptions = currentTask.correctanswer?.CorrectOption || []
+  const options = currentTask.options || []
 
-  const handleOptionClick = (option) => {
-    if (!submitted && !isOptionUsed(option)) {
-      setSelectedOption(option)
-    }
-  }
+  // === drag-state ===
+  const [draggedId, setDraggedId] = useState(null)
 
   const handleDropClick = (index) => {
-    if (!submitted && selectedOption) {
+    if (!submitted && draggedId) {
       setAssigned((prev) => ({
         ...prev,
-        [index]: selectedOption,
+        [index]: draggedId,
       }))
-      setSelectedOption(null)
+      setDraggedId(null)
     }
   }
 
   const handleSubmit = () => {
     setSubmitted(true)
-
     const isCorrect = correctAnswers.every(
       (answer, index) => assigned[index] === answer
     )
-
     if (isCorrect) {
       setCorrectAnswersCount((prev) => prev + 1)
     }
@@ -53,30 +49,40 @@ const ExerciseWordMatching = ({ task }) => {
     setSubmitted(false)
     setClicked(false)
     setAssigned({})
-    setSelectedOption(null)
+    setDraggedId(null)
   }
+
   function splitByDigit(text) {
-    const match = text.match(/^([A-Z]\d)(.+)$/i)
+    const match = text?.match(/^([A-Z]\d)(.+)$/i)
     if (match) {
       return {
-        level: match[1], // A1
-        type: match[2], // vocabular
+        level: match[1],
+        type: match[2],
       }
     }
     return null
   }
+
   function splitByUppercase(text) {
+    if (typeof text !== 'string') return []
     return text.split(/(?=[A-Z])/)
   }
+
   const slug2 = splitByDigit(path.slug2)
   const slug3 = splitByUppercase(path.slug3)
+
+  const isOptionUsed = (option) => Object.values(assigned).includes(option)
+
   return (
     <>
       <div className={styles.TaskBlockCardTitle}>
         <span style={{ textTransform: 'capitalize' }}>{path.slug}</span>{' '}
-        {slug2.level}:{' '}
+        {slug2?.level}:{' '}
         {slug3.map((word, index) => (
-          <span key={index} style={{ textTransform: 'capitalize' }}>
+          <span
+            key={index}
+            style={{ textTransform: 'capitalize', cursor: 'default' }}
+          >
             {word + ' '}
           </span>
         ))}
@@ -99,16 +105,20 @@ const ExerciseWordMatching = ({ task }) => {
         className={styles.TaskBlockCardAnswers}
         style={{ display: 'flex', gap: '30px' }}
       >
-        {/* Ліва частина (вихідні слова) */}
+        {/* Левый столбец — правильные слова */}
         <div>
           {correctOptions.map((option, index) => (
-            <div key={index} className={styles.TaskBlockOptionButton}>
+            <div
+              key={index}
+              className={styles.TaskBlockOptionButton}
+              style={{ cursor: 'default' }}
+            >
               {option}
             </div>
           ))}
         </div>
 
-        {/* Drop-зони */}
+        {/* Центр — Drop-зоны */}
         <div>
           {correctAnswers.map((_, index) => {
             const assignedText = assigned[index] || ''
@@ -122,38 +132,51 @@ const ExerciseWordMatching = ({ task }) => {
             }
 
             return (
-              <div
+              <DropZone
                 key={index}
+                id={`drop-${index}`}
                 onClick={() => handleDropClick(index)}
-                className={`${styles.TaskBlockOptionButton} ${dropClass}`}
-                style={{
-                  border: '2px dashed gray',
-
-                  textAlign: 'center',
-
-                  cursor: 'pointer',
-                }}
               >
-                {assignedText || 'Click to drop'}
-              </div>
+                <div
+                  className={`${styles.TaskBlockOptionButton} ${dropClass}`}
+                  style={{
+                    border: '2px dashed gray',
+                    textAlign: 'center',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {assignedText || 'Drop here'}
+                </div>
+              </DropZone>
             )
           })}
         </div>
 
-        {/* Варіанти (для вибору) */}
+        {/* Правый столбец — draggable опции */}
         <div>
           {options.map((option, index) => {
             const isUsed = isOptionUsed(option)
-            const isSelected = selectedOption === option
-
             return (
-              <div
-                className={styles.TaskBlockOptionButton}
+              <DraggableItem
                 key={index}
-                onClick={() => handleOptionClick(option)}
+                id={option}
+                onClick={(id) => {
+                  if (!submitted && !isUsed) {
+                    setDraggedId(id)
+                  }
+                }}
               >
-                {option}
-              </div>
+                <div
+                  className={styles.TaskBlockOptionButton}
+                  style={{
+                    opacity: isUsed ? 0.5 : 1,
+                    userSelect: 'none',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {option}
+                </div>
+              </DraggableItem>
             )
           })}
         </div>

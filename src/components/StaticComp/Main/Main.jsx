@@ -4,25 +4,31 @@ import { Link } from 'react-router-dom'
 import {
   HomeBigCardSecondSlide,
   HomeSmallCardFivethSlide,
-  HomeSmallCardThirdSlide,
   HomeSmallCardForthSlide,
 } from './Cards.jsx'
 import {
   HomeCardsData,
-  HomeSmallCardThirdSlideData,
   HomeSmallCardFourthSlideData,
 } from '../../../resoures/Data/HomeCardsData.js'
 
-import PagesData from '../../../resoures/Data/PagesData.js'
 import FirstView from '../../PagesComp/FirstView/FirstView.jsx'
 import PreFooter from '../PreFooter/PreFooter.jsx'
 const Main = () => {
+  const First = {
+    id: 1,
+    slug: 'home',
+    title: 'Home',
+    firstviewbackgroundimg: '/resoures/img/backgrounds/Home.webp',
+    firstviewtext:
+      'Learn English online and boost your skills with our engaging tools and materials.',
+    link: '/',
+    description: '',
+    stylespecial: { backgroundPosition: '100%' },
+  }
   return (
     <main className={styles.main}>
-      {PagesData.map((First) => {
-        if (First.title == 'Home')
-          return <FirstView key={First.id} data={First} />
-      })}
+      <FirstView key={First.id} data={First} />
+
       <div className={styles.firstSlideInclude2}>
         Everything you find here has been specially created by the British
         Council, the world's English teaching experts.

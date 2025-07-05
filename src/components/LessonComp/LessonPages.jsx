@@ -8,10 +8,10 @@ import { useState } from 'react'
 import React from 'react'
 import { useEffect } from 'react'
 const LessonPages = ({ lesson, tasks }) => {
-  console.log(tasks)
   const [genaratedTasks, setGenaratedTasks] = useState({})
   const [loading, setLoading] = useState(false)
   const path = useParams()
+  //Запрос генерації
   const GenerateTasks = async () => {
     try {
       setLoading(true)

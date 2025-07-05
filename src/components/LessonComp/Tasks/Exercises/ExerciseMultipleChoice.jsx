@@ -61,6 +61,7 @@ const ExerciseMultipleChoice = ({ task }) => {
         dangerouslySetInnerHTML={{ __html: task[1][taskNumber].tasktext }}
       ></div>
 
+      {/* Ответы */}
       <div className={styles.TaskBlockCardAnswers}>
         {task[1][taskNumber].options.map((option, index) => (
           <button

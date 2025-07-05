@@ -32,23 +32,27 @@ apiLessonOne.get('/:slug/:slug2/:slug3', async (req, res) => {
 
     // Получить задания
     const tasksQuery = `SELECT * FROM tasks WHERE lessonid = $1`
+
     const { rows: tasksRows } = await conn.query(tasksQuery, [
       lessonRows[0].idlesson,
     ])
 
-    // Парсим options в каждом задании
     tasksRows.forEach((task) => {
-      try {
-        task.options = JSON.parse(task.options)
-      } catch (err) {
-        console.error(
-          `Ошибка парсинга options для task ID ${task.idtask}:`,
-          err
-        )
+      if (typeof task.options === 'string') {
+        try {
+          task.options = JSON.parse(task.options)
+        } catch (err) {
+          console.error(
+            `Ошибка парсинга options для task ID ${task.idtask}:`,
+            err
+          )
+          task.options = []
+        }
+      } else if (!Array.isArray(task.options)) {
+        // подстраховка на случай, если options вдруг null или не массив
         task.options = []
       }
     })
-
     // Группируем задания по типу
     const groupedTasks = tasksRows.reduce((acc, task) => {
       const key = task.tasktype
@@ -58,6 +62,7 @@ apiLessonOne.get('/:slug/:slug2/:slug3', async (req, res) => {
     }, {})
 
     // Отправляем ответ
+
     res.json({
       lesson: lessonRows[0],
       tasks: groupedTasks,
