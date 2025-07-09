@@ -1,9 +1,40 @@
 import { useParams } from 'react-router-dom'
-import styles from '../style.module.css'
+import styles from './StylesNew.module.css' // Возвращаем импорт CSS Modules
 import { useState } from 'react'
 import React from 'react'
-import { DraggableItem, DropZone } from '../Drop/DraggableItem' // путь скорректируй под свой
+import { useDroppable, useDraggable } from '@dnd-kit/core' // Предполагается, что вы используете dnd-kit
 
+// --- Компоненты для перетаскивания (предполагается, что они в отдельном файле) ---
+// Вам нужно будет адаптировать их под вашу реализацию dnd-kit или другую библиотеку.
+
+function DraggableItem({ id, children, onClick, isUsed }) {
+  const { setNodeRef } = useDraggable({ id })
+  // Динамически добавляем класс 'used'
+  const finalClassName = `${styles.TaskBlockOptionButton} ${
+    isUsed ? styles.used : ''
+  }`
+
+  return (
+    <div
+      ref={setNodeRef}
+      onClick={() => onClick(id)}
+      className={finalClassName}
+    >
+      {children}
+    </div>
+  )
+}
+
+function DropZone({ id, children, onClick }) {
+  const { setNodeRef } = useDroppable({ id })
+  return (
+    <div onClick={() => onClick(id)} ref={setNodeRef}>
+      {children}
+    </div>
+  )
+}
+
+// --- Основной компонент задания ---
 const ExerciseWordMatching = ({ task }) => {
   const path = useParams()
   const [submitted, setSubmitted] = useState(false)
@@ -12,6 +43,7 @@ const ExerciseWordMatching = ({ task }) => {
   const [remainder, setRemainder] = useState(task?.[1]?.length - 1 || 0)
   const [assigned, setAssigned] = useState({})
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0)
+  const [draggedId, setDraggedId] = useState(null)
 
   const currentTask = task?.[1]?.[taskNumber]
   if (!currentTask) return <div>Задача отсутствует</div>
@@ -20,15 +52,9 @@ const ExerciseWordMatching = ({ task }) => {
   const correctOptions = currentTask.correctanswer?.CorrectOption || []
   const options = currentTask.options || []
 
-  // === drag-state ===
-  const [draggedId, setDraggedId] = useState(null)
-
   const handleDropClick = (index) => {
     if (!submitted && draggedId) {
-      setAssigned((prev) => ({
-        ...prev,
-        [index]: draggedId,
-      }))
+      setAssigned((prev) => ({ ...prev, [index]: draggedId }))
       setDraggedId(null)
     }
   }
@@ -52,37 +78,27 @@ const ExerciseWordMatching = ({ task }) => {
     setDraggedId(null)
   }
 
+  // Вспомогательные функции для парсинга заголовка
   function splitByDigit(text) {
     const match = text?.match(/^([A-Z]\d)(.+)$/i)
-    if (match) {
-      return {
-        level: match[1],
-        type: match[2],
-      }
-    }
-    return null
+    return match ? { level: match[1], type: match[2] } : null
   }
 
   function splitByUppercase(text) {
-    if (typeof text !== 'string') return []
-    return text.split(/(?=[A-Z])/)
+    return typeof text === 'string' ? text.split(/(?=[A-Z])/) : []
   }
 
   const slug2 = splitByDigit(path.slug2)
   const slug3 = splitByUppercase(path.slug3)
-
   const isOptionUsed = (option) => Object.values(assigned).includes(option)
 
   return (
-    <>
+    <div className={styles.TaskBlockContainer}>
       <div className={styles.TaskBlockCardTitle}>
         <span style={{ textTransform: 'capitalize' }}>{path.slug}</span>{' '}
         {slug2?.level}:{' '}
         {slug3.map((word, index) => (
-          <span
-            key={index}
-            style={{ textTransform: 'capitalize', cursor: 'default' }}
-          >
+          <span key={index} style={{ textTransform: 'capitalize' }}>
             {word + ' '}
           </span>
         ))}
@@ -90,10 +106,10 @@ const ExerciseWordMatching = ({ task }) => {
 
       <div className={styles.TaskBlockCardDescription}>
         <span>{currentTask.taskdescription}</span>
-        <span>{remainder} items remaining</span>
-        <span style={{ marginLeft: '15px' }}>
-          ✅ Correct answers: {correctAnswersCount}
-        </span>
+        <div className={styles.TaskCounters}>
+          <span>Осталось: {remainder}</span>
+          <span>✅ Правильно: {correctAnswersCount}</span>
+        </div>
       </div>
 
       <div
@@ -101,34 +117,28 @@ const ExerciseWordMatching = ({ task }) => {
         dangerouslySetInnerHTML={{ __html: currentTask.tasktext }}
       ></div>
 
-      <div
-        className={styles.TaskBlockCardAnswers}
-        style={{ display: 'flex', gap: '30px' }}
-      >
-        {/* Левый столбец — правильные слова */}
-        <div>
+      <div className={styles.ColumnsContainer}>
+        {/* Левая колонка — слова для сопоставления */}
+        <div className={styles.TaskColumn}>
           {correctOptions.map((option, index) => (
-            <div
-              key={index}
-              className={styles.TaskBlockOptionButton}
-              style={{ cursor: 'default' }}
-            >
+            <div key={index} className={styles.OptionItemStatic}>
               {option}
             </div>
           ))}
         </div>
 
         {/* Центр — Drop-зоны */}
-        <div>
+        <div className={styles.TaskColumn}>
           {correctAnswers.map((_, index) => {
             const assignedText = assigned[index] || ''
             const isCorrect = assignedText === correctAnswers[index]
 
-            let dropClass = styles.DropZoneDefault
+            // Формируем классы для drop-зоны
+            let dropZoneClasses = styles.DropZone
             if (submitted) {
-              dropClass = isCorrect
-                ? styles.DropZoneCorrect
-                : styles.DropZoneWrong
+              dropZoneClasses += isCorrect
+                ? ` ${styles.correct}`
+                : ` ${styles.incorrect}`
             }
 
             return (
@@ -137,51 +147,38 @@ const ExerciseWordMatching = ({ task }) => {
                 id={`drop-${index}`}
                 onClick={() => handleDropClick(index)}
               >
-                <div
-                  className={`${styles.TaskBlockOptionButton} ${dropClass}`}
-                  style={{
-                    border: '2px dashed gray',
-                    textAlign: 'center',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {assignedText || 'Drop here'}
+                <div className={dropZoneClasses}>
+                  {assignedText || (
+                    <span className={styles.DropZonePlaceholder}>
+                      Drop here
+                    </span>
+                  )}
                 </div>
               </DropZone>
             )
           })}
         </div>
 
-        {/* Правый столбец — draggable опции */}
-        <div>
-          {options.map((option, index) => {
-            const isUsed = isOptionUsed(option)
-            return (
-              <DraggableItem
-                key={index}
-                id={option}
-                onClick={(id) => {
-                  if (!submitted && !isUsed) {
-                    setDraggedId(id)
-                  }
-                }}
-              >
-                <div
-                  className={styles.TaskBlockOptionButton}
-                  style={{
-                    opacity: isUsed ? 0.5 : 1,
-                    userSelect: 'none',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {option}
-                </div>
-              </DraggableItem>
-            )
-          })}
+        {/* Правый столбец — перетаскиваемые опции */}
+        <div className={styles.TaskColumn}>
+          {options.map((option, index) => (
+            <DraggableItem
+              key={index}
+              id={option}
+              isUsed={isOptionUsed(option)}
+              onClick={(id) => {
+                if (!submitted && !isOptionUsed(id)) {
+                  setDraggedId(id)
+                }
+              }}
+            >
+              {option}
+            </DraggableItem>
+          ))}
         </div>
       </div>
 
+      {/* Навигационные кнопки */}
       <div className={styles.TaskBlockNavButtonsBlock}>
         <button
           onClick={() => {
@@ -194,14 +191,10 @@ const ExerciseWordMatching = ({ task }) => {
           }}
           className={styles.TaskBlockNavButton}
         >
-          {clicked
-            ? remainder === 0
-              ? 'Everything is done'
-              : 'Next'
-            : 'Check'}
+          {clicked ? (remainder === 0 ? 'Завершить' : 'Далее') : 'Проверить'}
         </button>
       </div>
-    </>
+    </div>
   )
 }
 

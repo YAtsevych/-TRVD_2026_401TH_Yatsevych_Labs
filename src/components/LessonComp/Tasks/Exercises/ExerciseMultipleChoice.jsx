@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom'
-import styles from '../style.module.css'
+import styles from './StylesNew.module.css'
 import { useState } from 'react'
 import React from 'react'
 const ExerciseMultipleChoice = ({ task }) => {
+  console.log(task)
   const path = useParams()
   const [selected, setSelected] = useState(null)
   const [active, setActive] = useState(false)
@@ -35,9 +36,14 @@ const ExerciseMultipleChoice = ({ task }) => {
   }
   const slug2 = splitByDigit(path.slug2)
   const slug3 = splitByUppercase(path.slug3)
-
+  const speak = (text, lang = 'en-US') => {
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.lang = lang
+    speechSynthesis.speak(utterance)
+  }
   return (
     <>
+      {/* Заглавие раздела "Vocabular A1: Food And Drinks" */}
       <div className={styles.TaskBlockCardTitle}>
         <span style={{ textTransform: 'capitalize' }}>{path.slug}</span>{' '}
         {slug2.level}:{' '}
@@ -47,54 +53,67 @@ const ExerciseMultipleChoice = ({ task }) => {
           </span>
         ))}
       </div>
-
+      {/* Счет правильных и оставшихся вопросов */}
       <div className={styles.TaskBlockCardDescription}>
         <span>{task[1][taskNumber].taskdescription}</span>
-        <span>{remainder} items remaining</span>
-        <span style={{ marginLeft: '15px' }}>
-          ✅ Correct answers: {CorrectAnswersCount}
-        </span>
+        <div>
+          <span>{remainder} items remaining</span>
+          <span style={{ marginLeft: '15px' }}>
+            ✅ Correct answers: {CorrectAnswersCount}
+          </span>
+        </div>
       </div>
 
-      <div
-        className={styles.TaskBlockCardQueshion}
-        dangerouslySetInnerHTML={{ __html: task[1][taskNumber].tasktext }}
-      ></div>
+      {/* Блок с вопросом(слово + транскрипция + аудио) */}
+      <div className={styles.TaskBlockCardQueshionBlock}>
+        <div
+          className={styles.TaskBlockCardQueshion}
+          dangerouslySetInnerHTML={{ __html: task[1][taskNumber].tasktext }}
+        ></div>
+        <button onClick={() => speak(task[1][taskNumber].taskObject)}>
+          <img
+            className={styles.TaskBlockCardAudioBtn}
+            src="/resoures/img/icons/audio_icon1.png"
+          ></img>
+        </button>
+      </div>
 
       {/* Ответы */}
       <div className={styles.TaskBlockCardAnswers}>
-        {task[1][taskNumber].options.map((option, index) => (
-          <button
-            className={`${styles.TaskBlockOptionButton} ${
-              active === index ? styles.TaskBlockOptionButtonActive : ''
-            }`}
-            key={index}
-            onClick={() => {
-              setActive(index)
-              setSelected(option)
-              setSubmitted(false)
-            }}
-          >
-            {option}
-          </button>
-        ))}
+        {task[1][taskNumber].options.map((option, index) => {
+          // --- НАЧАЛО ИЗМЕНЕНИЙ ---
+          const getButtonClasses = () => {
+            const classes = [styles.TaskBlockOptionButton]
+            if (submitted) {
+              if (option === task[1][taskNumber].correctanswer) {
+                classes.push(styles.correct)
+              } else if (option === selected) {
+                classes.push(styles.incorrect)
+              }
+            } else {
+              if (active === index) {
+                classes.push(styles.TaskBlockOptionButtonActive)
+              }
+            }
+            return classes.join(' ')
+          }
+          // --- КОНЕЦ ИЗМЕНЕНИЙ ---
 
-        {/* Результат перевірки */}
-        {submitted && (
-          <div>
-            {selected === task[1][taskNumber].correctanswer ? (
-              <span>Correct!</span>
-            ) : (
-              <span>
-                Incorrect. Correct answer {'  "'}
-                <span style={{ fontWeight: 'bold' }}>
-                  {task[1][taskNumber].correctanswer}
-                </span>
-                {'"'}
-              </span>
-            )}
-          </div>
-        )}
+          return (
+            <button
+              key={index}
+              disabled={submitted} // --- ДОБАВЛЕНО ---
+              className={getButtonClasses()} // --- ИЗМЕНЕНО ---
+              onClick={() => {
+                setActive(index)
+                setSelected(option)
+                setSubmitted(false)
+              }}
+            >
+              {option}
+            </button>
+          )
+        })}
 
         {/* Фінальний результат */}
         {submitted && remainder === 0 && (
@@ -104,20 +123,41 @@ const ExerciseMultipleChoice = ({ task }) => {
             </span>
           </div>
         )}
-
-        {/* Підказка */}
-        {hint && (
-          <div className={styles.TaskBlockExplanation}>
-            <span
-              dangerouslySetInnerHTML={{
-                __html: task[1][taskNumber].explanation,
-              }}
-            ></span>
-          </div>
-        )}
       </div>
+      {/* Результат перевірки */}
+      {submitted && (
+        <>
+          {selected === task[1][taskNumber].correctanswer ? (
+            <div className={styles.TaskBlockResultBlockCorrect}>
+              <span>Correct!</span>
+            </div>
+          ) : (
+            <div className={styles.TaskBlockResultBlockIncorrect}>
+              <span>
+                Incorrect. Correct answer {'  "'}
+                <span>{task[1][taskNumber].correctanswer}</span>
+                {'"'}
+              </span>
+            </div>
+          )}
+        </>
+      )}
+      {/* Підказка */}
+      {hint && (
+        <div className={styles.TaskBlockExplanationBlock}>
+          <span>{task[1][taskNumber].explanation}</span>
+        </div>
+      )}
 
+      {/* Блок с кнопками Подскаска и Проверить */}
       <div className={styles.TaskBlockNavButtonsBlock}>
+        <button
+          className={styles.TaskBlockHintButton}
+          onClick={() => setHint((prev) => !prev)}
+        >
+          ? Show hint
+        </button>
+
         <button
           onClick={() => {
             if (clicked) {
@@ -140,15 +180,6 @@ const ExerciseMultipleChoice = ({ task }) => {
         >
           {clicked ? (remainder === 0 ? 'Done' : 'Next') : 'Check'}
         </button>
-
-        {task[1][taskNumber].explanation !== '' && (
-          <button
-            className={styles.TaskBlockNavButton}
-            onClick={() => setHint((prev) => !prev)}
-          >
-            Show hint
-          </button>
-        )}
       </div>
     </>
   )

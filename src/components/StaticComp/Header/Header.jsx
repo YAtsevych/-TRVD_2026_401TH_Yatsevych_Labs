@@ -1,39 +1,58 @@
-import styles from './style.module.css'
-import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import React from 'react'
-const Header = ({ pages }) => {
-  if (!pages) return <div>Загрузка...</div>
-  else
-    return (
-      <header className={styles.header}>
-        <div className={styles.headerNavTop}>
-          <div className="logoBlock">
-            <div className="logo">
-              <Link to="/" className={styles.headerNavBottomItem}>
-                <img src="/resoures/img/logo/logo.svg" alt="logo" />
-              </Link>
-            </div>
-          </div>
-          <div className={styles.headerNavTopLogin}>
-            <Link to="/registration" className={styles.headerNavBottomItem}>
-              Log in
-            </Link>
-          </div>
-        </div>
+import { Link, NavLink } from 'react-router-dom'
+import styles from './style.module.css' // Подключаем новый файл стилей
 
-        <div className={styles.headerNavBottom}>
-          {pages.map((card) => (
-            <Link
-              key={card.idpages}
-              to={card.link}
-              className={styles.headerNavBottomItem}
+const Header = ({ pages }) => {
+  if (!pages) {
+    return <div>Загрузка...</div>
+  }
+
+  // Фильтруем страницы, чтобы отделить "Home" и остальные
+  const homePage = pages.find((p) => p.title === 'Home' || p.title === 'Acasă')
+  const otherPages = pages.filter(
+    (p) => p.title !== 'Home' && p.title !== 'Acasă'
+  )
+
+  return (
+    <header className={styles.header}>
+      <nav className={styles.nav}>
+        {/* Логотип */}
+        <Link to="/" className={styles.logo}>
+          Consul
+        </Link>
+
+        {/* Навигационные ссылки */}
+        <div className={styles.navLinks}>
+          {homePage && (
+            <NavLink
+              to={homePage.link}
+              className={({ isActive }) =>
+                `${styles.navLink} ${isActive ? styles.active : ''}`
+              }
             >
-              {card.title}
-            </Link>
+              {homePage.title}
+            </NavLink>
+          )}
+          {otherPages.map((page) => (
+            <NavLink
+              key={page.idpages}
+              to={page.link}
+              className={({ isActive }) =>
+                `${styles.navLink} ${isActive ? styles.active : ''}`
+              }
+            >
+              {page.title}
+            </NavLink>
           ))}
         </div>
-      </header>
-    )
+
+        {/* Кнопка входа */}
+        <Link to="/registration" className={styles.loginButton}>
+          Log In
+        </Link>
+      </nav>
+    </header>
+  )
 }
+
 export default Header

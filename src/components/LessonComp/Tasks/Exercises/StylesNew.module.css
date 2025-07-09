@@ -1,0 +1,451 @@
+.TaskContainer {
+  width: 100%;
+}
+.TaskTitle {
+  width: 100%;
+  height: 50px;
+  background-color: rgba(35, 8, 90, 0.15);
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  font-size: 20px;
+}
+.TaskMainLine {
+  margin-top: 10px;
+}
+.TaskBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ebeff0;
+  position: relative;
+}
+.TaskBlockFrameFirst {
+  width: 97%;
+  height: 95%;
+  background-color: #dadada;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px 0px;
+}
+.TaskBlockCard {
+  width: 97%;
+  height: 95%;
+  background-color: #ffffff;
+  padding-left: 25px;
+  padding-top: 25px;
+}
+.TaskBlockCardTitle {
+  font-size: 24px;
+  color: black;
+  font-weight: 700;
+  text-align: center;
+}
+
+.TaskBlockCardQueshionBlock {
+  width: 96%;
+  background-color: #f3f4f6;
+  height: 75px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.TaskBlockCardAudioBtn {
+  border: 1px solid #f3f4f6;
+  position: absolute;
+  right: 15px;
+  top: 8px;
+  width: 25px;
+  cursor: pointer;
+}
+
+.TaskBlockOptionButton {
+  display: block;
+  width: 150px;
+  border-radius: 7px;
+
+  margin-right: 20px;
+  border: 2px solid rgb(164, 160, 160);
+  padding-left: 5px;
+  min-height: 27.5px;
+}
+.TaskBlockCardAnswers {
+  margin-top: 10px;
+  width: 96%;
+  display: grid;
+  grid-template-columns: 1fr; /* Одна колонка по умолчанию */
+  gap: 1rem;
+}
+@media (min-width: 670px) {
+  .TaskBlockCardAnswers {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.TaskBlockOptionButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  /* Отступы и рамка */
+  padding: 1rem; /* 16px */
+  border: 2px solid #d1d5db; /* серая рамка */
+  border-radius: 0.5rem; /* 8px скругление углов */
+
+  /* Текст */
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  text-align: left;
+
+  /* Цвета и фон */
+  background-color: #ffffff;
+  color: #1f2937;
+
+  /* Анимация и курсор */
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.TaskBlockHintButton {
+  border: 0px solid white;
+  background-color: transparent;
+  font-size: 17px;
+  font-weight: 700;
+  color: #6b7281;
+  padding-left: 10px;
+  cursor: pointer;
+}
+.TaskBlockNavButton {
+  display: inline-flex; /* Используем inline-flex для выравнивания иконки и текста */
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; /* 8px расстояние между текстом и иконкой */
+  margin-right: 25px;
+  margin-bottom: 15px;
+  /* Цвета и фон */
+  background-color: #3b82f6; /* синий фон */
+  color: #ffffff; /* белый текст */
+
+  /* Текст */
+  font-weight: 700; /* жирный шрифт */
+
+  /* Отступы, рамка и скругление */
+  padding: 0.75rem 1.5rem; /* 12px по вертикали, 24px по горизонтали */
+  border: none;
+  border-radius: 0.5rem; /* 8px скругление углов */
+
+  /* Тень для объема */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  /* Анимация и курсор */
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.TaskBlockNavButtonsBlock {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.TaskBlockNavButton:disabled {
+  background-color: #dad3d3;
+}
+.TaskBlockExplanationBlock {
+  width: 96%;
+  border-radius: 10px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fef9c3;
+  padding: 8px 13px;
+  font-weight: 600;
+}
+.TaskBlockResultBlockCorrect {
+  width: 96%;
+  border-radius: 10px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #dcfce7;
+  padding: 8px 13px;
+  font-weight: 600;
+  color: #1f6b3f;
+}
+.TaskBlockResultBlockIncorrect {
+  width: 96%;
+  border-radius: 10px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fee2e2;
+  padding: 8px 13px;
+  font-weight: 600;
+  color: #9d2b53;
+}
+.WordPuzzleItem {
+  height: 40px;
+  padding: 5px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #413f3f;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.WordPuzzleItemDrop {
+  width: auto;
+  height: 40px;
+  padding: 5px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #353434;
+  background-color: #ece7e7;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.DropZoneDefault {
+  background-color: white;
+  border: 1px solid #413f3f;
+  transition: 0.3s;
+  margin-top: 5px;
+  min-height: 27.5px;
+  border-radius: 10px;
+  padding: 0px 10px;
+  margin-right: 10px;
+}
+
+.DropZoneCorrect {
+  background-color: #d4edda; /* зелёный */
+  border: 2px solid #28a745;
+  color: #155724;
+  min-height: 27.5px;
+  border-radius: 10px;
+  padding: 0px 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.DropZoneWrong {
+  background-color: #f8d7da; /* красный */
+  border: 2px solid #dc3545;
+  color: #721c24;
+  min-height: 27.5px;
+  border-radius: 10px;
+  padding: 0px 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.TaskBlockExplanation {
+  padding-right: 75px;
+  margin-top: 10px;
+}
+.TaskBlockOptionButton:not(:disabled):hover {
+  border-color: #6b7280;
+  background-color: #f9fafb;
+}
+
+/* --- Основной контейнер задания --- */
+.TaskBlockContainer {
+  font-family: sans-serif;
+  background-color: #ffffff;
+  border-radius: 1rem; /* 16px */
+  padding: 2rem; /* 32px */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.TaskBlockCardDescription {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #6b7280;
+  margin-bottom: 1.5rem; /* 24px */
+}
+
+.TaskCounters {
+  display: flex;
+  gap: 1rem; /* 16px */
+}
+
+.TaskBlockCardQueshion {
+  font-size: 1.1rem;
+}
+
+/* --- Контейнер для трех колонок --- */
+.ColumnsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem; /* 24px */
+  align-items: start;
+}
+
+.TaskColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* 12px */
+}
+
+/* --- Стили для элементов в колонках --- */
+.TaskBlockOptionButton,
+.OptionItemStatic,
+.DropZone {
+  width: 100%;
+  min-height: 54px; /* Фиксированная высота для выравнивания */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem; /* 12px */
+  border-radius: 0.5rem; /* 8px */
+  font-size: 1rem; /* 16px */
+  font-weight: 600;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Элементы в левой колонке (статичные) */
+.OptionItemStatic {
+  background-color: #f3f4f6;
+  color: #1f2937;
+  border: 2px solid #e5e7eb;
+}
+
+/* Элементы в правой колонке (перетаскиваемые) */
+.TaskBlockOptionButton {
+  background-color: #ffffff;
+  border: 2px solid #d1d5db;
+  cursor: grab;
+  transition: all 0.2s ease;
+}
+
+.TaskBlockOptionButton:hover {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+/* Использованный элемент */
+.TaskBlockOptionButton.used {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f9fafb;
+}
+
+/* --- Стили для Drop-зон --- */
+.DropZone {
+  border: 2px dashed #9ca3af;
+  transition: all 0.2s ease;
+}
+
+.DropZonePlaceholder {
+  color: #9ca3af;
+}
+
+/* Стили для Drop-зон после проверки */
+.DropZone.correct {
+  border-style: solid;
+  border-color: #22c55e;
+  background-color: #f0fdf4;
+  color: #166534;
+}
+
+.DropZone.incorrect {
+  border-style: solid;
+  border-color: #ef4444;
+  background-color: #fef2f2;
+  color: #991b1b;
+}
+
+.TaskBlockNavButton {
+  background-color: #2563eb;
+  color: white;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.TaskBlockNavButton:hover {
+  background-color: #1d4ed8;
+}
+
+.TaskBlockNavButton:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+/* Стиль для активной (выбранной) кнопки до проверки */
+
+.TaskBlockOptionButtonActive {
+  background-color: #3b82f6;
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+.TaskBlockResultBlockCorrect {
+  width: 96%;
+  border-radius: 10px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #dcfce7;
+  padding: 8px 13px;
+  font-weight: 600;
+  color: #1f6b3f;
+}
+.TaskBlockResultBlockIncorrect {
+  width: 96%;
+  border-radius: 10px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fee2e2;
+  padding: 8px 13px;
+  font-weight: 600;
+  color: #9d2b53;
+}
+/* Стиль для ПРАВИЛЬНОГО ответа (после проверки) */
+.correct {
+  border-color: #22c55e; /* зеленый */
+  background-color: #f0fdf4; /* светло-зеленый */
+  color: #166534;
+}
+
+/* Стиль для НЕПРАВИЛЬНОГО ответа (после проверки) */
+.incorrect {
+  border-color: #ef4444; /* красный */
+  background-color: #fef2f2; /* светло-красный */
+  color: #991b1b;
+}
+
+/* Стиль для заблокированных кнопок */
+.TaskBlockOptionButton:disabled {
+  cursor: not-allowed;
+}
+
+/* Чтобы цвета не блекли у правильного/неправильного ответа */
+.TaskBlockOptionButton.correct:disabled,
+.TaskBlockOptionButton.incorrect:disabled {
+  opacity: 1;
+}
+
+/* Остальные заблокированные кнопки делаем полупрозрачными */
+.TaskBlockOptionButton:disabled:not(.correct):not(.incorrect) {
+  opacity: 0.6;
+}

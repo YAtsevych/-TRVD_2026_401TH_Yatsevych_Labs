@@ -26,12 +26,17 @@ const HomeBigCardSecondSlide = ({ data, styles }) => {
     </div>
   )
 }
+
 const HomeSmallCardThirdSlide = ({ data, styles }) => {
   return (
     <div className={styles.preFooterCard}>
-      <img src={data.cardImgSrc} alt="" />
-      <div className={styles.preFooterCardTitle}>{data.title}</div>
-      <div className={styles.preFooterCardText}>{data.description}</div>
+      <img
+        src={data.cardImgSrc}
+        alt={data.title}
+        className={styles.preFooterCardIcon}
+      />
+      <h3 className={styles.preFooterCardTitle}>{data.title}</h3>
+      <p className={styles.preFooterCardText}>{data.description}</p>
     </div>
   )
 }

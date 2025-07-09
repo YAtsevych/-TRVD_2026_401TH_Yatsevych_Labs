@@ -34,14 +34,16 @@ export default function CreateExerciseForVocabular(lessonVocabular, tasks) {
         tasktype: 'MultipleChoice',
         tasktext:
           lang === 'ru'
-            ? `Choose the correct translation: <strong><em>${
-                vocab.word
-              }</em></strong> (${vocab.transcription || ''})`
-            : `Choose the correct translation: ${vocab.translation}`,
+            ? `<strong><em>${vocab.word}</em></strong> (${
+                vocab.transcription || ''
+              })`
+            : ` ${vocab.translation}`,
+        taskObject: lang === 'ru' ? vocab.word : vocab.translation,
         correctanswer: vocab[direction],
         options,
-        explanation: '',
-        taskdescription: 'Choose only one correct answer.',
+        explanation:
+          'Potato is a starchy plant tuber which is one of the most important food crops, cooked and eaten as a vegetable.',
+        taskdescription: 'Choose the correct translation:',
         tasktitle: 'Odd one out',
       })
     }
@@ -133,7 +135,7 @@ function createRandomOptionsMultipleChoice(index, lessonVocabular, language) {
   options.add(correctAnswer)
 
   let attempts = 0
-  while (options.size < 5 && attempts < 50) {
+  while (options.size < 4 && attempts < 50) {
     attempts++
     const rn = Math.floor(Math.random() * lessonVocabular.length)
     const candidate =

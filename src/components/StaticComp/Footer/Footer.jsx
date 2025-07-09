@@ -1,48 +1,66 @@
-import styles from './style.module.css'
-import { Link } from 'react-router-dom'
 import React from 'react'
+import { Link } from 'react-router-dom'
+import styles from './style.module.css' // Подключаем новый файл стилей
+
+// Компонент для иконок, чтобы было проще их использовать
+const Icon = ({ name }) => <i data-lucide={name} className={styles.icon}></i>
+
 const Footer = () => {
+  // В реальном приложении React, вам нужно будет убедиться,
+  // что скрипт lucide.createIcons() вызывается после рендеринга.
+  // React.useEffect(() => { if(window.lucide) window.lucide.createIcons() }, []);
+
   return (
     <footer className={styles.footer}>
-      <div className={styles.footerFirstRow}>
-        <div className="logo">
-          <Link to="/">
-            <img src="/resoures/img/logo/logo.svg" alt="acscas" />
-          </Link>
+      <div className={styles.footerContainer}>
+        <div className={styles.footerMain}>
+          {/* Блок с информацией */}
+          <div className={styles.footerInfo}>
+            <Link to="/" className={styles.logo}>
+              Consul
+            </Link>
+            <p className={styles.footerText}>
+              A personal project by Yaroslav Yatsevych — a student from Ukraine.
+              <br />
+              An independent initiative focused on cultural exchange and
+              educational opportunities.
+            </p>
+          </div>
+
+          {/* Блок с навигацией и социальными сетями */}
+          <div className={styles.footerLinksContainer}>
+            <div className={styles.footerNav}>
+              <Link to="/about" className={styles.footerLink}>
+                About us
+              </Link>
+              <Link to="/start" className={styles.footerLink}>
+                Getting start
+              </Link>
+              <Link to="/contact" className={styles.footerLink}>
+                Contact us
+              </Link>
+            </div>
+            <div className={styles.footerSocials}>
+              <a href="#" className={styles.socialLink} aria-label="Instagram">
+                <Icon name="instagram" />
+              </a>
+              <a href="#" className={styles.socialLink} aria-label="GitHub">
+                <Icon name="github" />
+              </a>
+              <a href="#" className={styles.socialLink} aria-label="LinkedIn">
+                <Icon name="linkedin" />
+              </a>
+            </div>
+          </div>
         </div>
-        <div className={styles.footerNav}>
-          <Link to="" className={styles.footerNavItem}>
-            About us
-          </Link>
-          <Link to="" className={styles.footerNavItem}>
-            Getting start
-          </Link>
-          <Link to="" className={styles.footerNavItem}>
-            Contact us
-          </Link>
-          <Link to="" className={styles.footerNavItem}>
-            Site map
-          </Link>
+
+        {/* Копирайт */}
+        <div className={styles.footerCopyright}>
+          © {new Date().getFullYear()} Consul. All Rights Reserved.
         </div>
-        <div className={styles.footerContacts}>
-          <Link to="" className={styles.footerContactsItem}>
-            <img src="/resoures/img/icons/instagram_icon.png" alt="" />
-          </Link>
-          <Link to="" className={styles.footerContactsItem}>
-            <img src="/resoures/img/icons/github_icon.png" alt="" />
-          </Link>
-          <Link to="" className={styles.footerContactsItem}>
-            <img src="/resoures/img/icons/linkedin_icon.png" alt="" />
-          </Link>
-        </div>
-      </div>
-      <div className={styles.footerSecondRow}>
-        © SpeackFree <br></br>A personal project by Yaroslav Yatsevych — a
-        student from Ukraine. <br></br>An independent initiative focused on
-        cultural exchange and educational opportunities. Not affiliated with any
-        official organization.
       </div>
     </footer>
   )
 }
+
 export default Footer
