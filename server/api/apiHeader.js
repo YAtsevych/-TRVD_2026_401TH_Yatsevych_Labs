@@ -8,12 +8,7 @@ apiHeader.get('/', async (req, res) => {
   try {
     const sql = `SELECT idPages, title, link FROM pages;`
     const { rows } = await pool.query(sql)
-    const content = `export const headerData = ${JSON.stringify(
-      rows,
-      null,
-      2
-    )};`
-    fs.writeFileSync('../../src/resoures/Data/Header.js', content)
+
     res.json(rows)
   } catch (err) {
     console.error('Error fetching pages:', err)
