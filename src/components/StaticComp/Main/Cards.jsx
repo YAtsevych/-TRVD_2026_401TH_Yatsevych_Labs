@@ -2,24 +2,20 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 const HomeBigCardSecondSlide = ({ data, styles }) => {
   return (
-    <div className={`${styles[data.cardClass]} ${styles.secondSlideCard}`}>
+    <div className={styles.card}>
       <div
-        className={styles.secondSlideCardImg}
-        style={{
-          backgroundImage: `url(${data.cardImgSrc})`,
-        }}
+        className={styles.cardImage}
+        style={{ backgroundImage: `url(${data.cardImgSrc})` }}
       ></div>
-      <div className={styles.CardContent}>
-        <div className={styles.CardContentTitle}>{data.title}</div>
-        <div className={styles.CardContentDescription}>{data.description}</div>
-        <div className={styles.CardContentList}>
-          <ul>
-            {data.list.map((item, idx) => (
-              <li key={idx}>{item}</li>
-            ))}
-          </ul>
-        </div>
-        <Link to={data.link} className={styles.CardContentButton}>
+      <div className={styles.cardContent}>
+        <h3 className={styles.contentTitle}>{data.title}</h3>
+        <p className={styles.contentDescription}>{data.description}</p>
+        <ul className={styles.contentList}>
+          {data.list.map((item, idx) => (
+            <li key={idx}>{item}</li>
+          ))}
+        </ul>
+        <Link to={data.link} className={styles.contentButton}>
           Start to learn
         </Link>
       </div>
@@ -44,32 +40,38 @@ const HomeSmallCardForthSlide = ({ data, styles }) => {
   return (
     <div className={styles.fourthSlideCard}>
       <img src={data.cardImgSrc} alt="" />
-      <Link to="" className={styles.fourthSlideCardTitle}>
+      <Link to={data.link} className={styles.fourthSlideCardTitle}>
         {data.title}
       </Link>
       <div className={styles.fourthSlideCardText}>{data.description}</div>
+      <Link to={data.link} className={styles.fourthSlideCardTitle}>
+        Learn more
+      </Link>
     </div>
   )
 }
-const HomeSmallCardFivethSlide = ({ data, styles }) => {
+const InfoCard = ({ data, styles }) => {
   return (
-    <div className={styles.fivethSlideCard}>
-      <div className={styles.fivethSlideCardPoint}>
-        <img src="/resoures/img/icons/check_mark_icon.png" alt="#" />
-      </div>
-      <div className={styles.fivethSlideCardContent}>
-        <div className={styles.fivethSlideCardTitle}>{data.title}</div>
-        <div className={styles.fivethSlideCardText}>
-          {data.shortDescription}
+    <div className={styles.infoCard}>
+      <div className={styles.cardHeader}>
+        <div className={styles.iconWrapper}>
+          {' '}
+          <img
+            className={styles.icon}
+            src="/resoures/img/icons/check_mark_icon.png"
+            alt="#"
+          />
         </div>
+        <h3 className={styles.cardTitle}>{data.title}</h3>
       </div>
+      <p className={styles.cardText}>{data.shortDescription}</p>
     </div>
   )
 }
 
 export {
   HomeBigCardSecondSlide,
-  HomeSmallCardFivethSlide,
+  InfoCard,
   HomeSmallCardThirdSlide,
   HomeSmallCardForthSlide,
 }

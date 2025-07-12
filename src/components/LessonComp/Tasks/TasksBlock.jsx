@@ -20,7 +20,10 @@ const TasksBlock = ({ tasks }) => {
               className={styles.TaskTitle}
               onClick={() => handleTaskClick(index)}
             >
-              Task{(TaskNumber = TaskNumber + 1)}
+              <span className={styles.TaskMainLineNumber}>
+                {(TaskNumber = TaskNumber + 1)}
+              </span>
+              <span className={styles.TaskMainLine}>{type[0]}</span>
             </div>
             <div
               style={{

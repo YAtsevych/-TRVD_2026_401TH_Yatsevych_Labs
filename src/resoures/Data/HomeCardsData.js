@@ -87,6 +87,7 @@ const HomeSmallCardFourthSlideData = [
     description:
       ' Learn more about the different CEFR levels and what learners at each level can do.',
     cardImgSrc: '/resoures/img/icons/increase_icon.png',
+    link: '/levels',
   },
   {
     id: 2,
@@ -94,6 +95,7 @@ const HomeSmallCardFourthSlideData = [
     description:
       'Get an indication of your English proficiency to help you choose learning materials at the right level.',
     cardImgSrc: '/resoures/img/icons/Test_icon.png',
+    link: '/levels/onlineEnglishLevelTest',
   },
 ]
 export {

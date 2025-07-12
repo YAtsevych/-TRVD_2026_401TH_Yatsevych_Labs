@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import {
   HomeBigCardSecondSlide,
-  HomeSmallCardFivethSlide,
+  InfoCard,
   HomeSmallCardForthSlide,
 } from './Cards.jsx'
 import {
@@ -24,38 +24,55 @@ const Main = () => {
     link: '/',
     description: '',
     stylespecial: { backgroundPosition: '100%' },
+    firstviewtitle: 'Master English with Confidence',
+    firstviewsubtitle:
+      'Learn English online and boost your skills with our engaging tools and materials.',
   }
   return (
     <main className={styles.main}>
       <FirstView key={First.id} data={First} />
 
-      <div className={styles.firstSlideInclude2}>
-        Everything you find here has been specially created by the British
-        Council, the world's English teaching experts.
-      </div>
-
-      <div className={styles.secondSlide}>
-        <div className={styles.secondSlideTitle}>
-          We provide you with the right tools to help you interact confidently
-          in the real world.
+      <section className={styles.contentSection}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>
+            We provide you with the right tools to help you interact confidently
+            in the real world.
+          </h2>
         </div>
-        <div className={`${styles.secondSlideCards}`}>
-          {HomeCardsData.map((card) => {
-            return (
-              <HomeBigCardSecondSlide
-                key={card.id}
-                data={card}
-                styles={styles}
-              />
-            )
-          })}
+
+        <div className={styles.cardsContainer}>
+          {HomeCardsData.map((card) => (
+            <HomeBigCardSecondSlide key={card.id} data={card} styles={styles} />
+          ))}
         </div>
-      </div>
+      </section>
 
-      <div className={styles.thirdSlide}>
-        <PreFooter />
-      </div>
+      <section className={styles.sectionContainer}>
+        <div className={styles.contentWrapper}>
+          <h2 className={styles.title}>
+            Explore our site to improve your English with our bite-sized
+            lessons, quizzes and games.
+          </h2>
+          <p className={styles.subtitle}>
+            With our varied selection of learning materials, you can practice
+            your English for free.
+          </p>
 
+          <div className={styles.cardsGrid}>
+            {HomeCardsData.slice()
+              .reverse()
+              .map((card) => (
+                <InfoCard key={card.id} data={card} styles={styles} />
+              ))}
+          </div>
+
+          <div className={styles.buttonContainer}>
+            <Link to="/start" className={styles.ctaButton}>
+              Get Started
+            </Link>
+          </div>
+        </div>
+      </section>
       <div className={styles.fourthSlide}>
         <div className={styles.fourthSlideCards}>
           {HomeSmallCardFourthSlideData.map((card) => (
@@ -66,31 +83,6 @@ const Main = () => {
             />
           ))}
         </div>
-      </div>
-
-      <div className={styles.fivethSlide}>
-        <div className={styles.fivethSlideTitle}>
-          Explore our site to improve your English with our bite-sized lessons,
-          quizzes and games. With our varied selection of learning materials,
-          you can practise your English for free.
-        </div>
-        <div className={styles.fivethSlideCards}>
-          {HomeCardsData.slice()
-            .reverse()
-            .map((card) => {
-              return (
-                <HomeSmallCardFivethSlide
-                  key={card.id}
-                  data={card}
-                  styles={styles}
-                />
-              )
-            })}
-        </div>
-
-        <Link to="" className={styles.fivethSlideButton}>
-          Get Start
-        </Link>
       </div>
     </main>
   )

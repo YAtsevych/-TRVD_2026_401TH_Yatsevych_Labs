@@ -179,7 +179,6 @@
   margin-bottom: 60px;
 }
 .fourthSlideCard {
-  width: 500px;
   height: 250px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
   display: flex;
@@ -187,8 +186,13 @@
   align-items: center;
   border-top-left-radius: 50px;
   border-bottom-right-radius: 50px;
+  width: 100%; /* Делаем ширину гибкой */
+  max-width: 500px;
+  transition: transform 0.3s ease-in-out;
 }
-
+.fourthSlideCard:hover {
+  transform: translateY(-0.5rem);
+}
 .fourthSlideCard img {
   margin-top: 25px;
   width: 100px;
@@ -225,6 +229,12 @@
   border-top-left-radius: 50px;
   border-bottom-right-radius: 50px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.fivethSlideCardTitleBlock {
+  display: flex;
   flex-direction: row;
 }
 .fivethSlideCardContent {
@@ -232,25 +242,19 @@
   flex-direction: column;
 }
 .fivethSlideCardTitle {
-  padding-top: 25px;
-  padding-left: 30px;
   font-size: 25px;
 }
 .fivethSlideCardText {
   width: 260px;
-  padding-left: 30px;
-  padding-right: 30px;
 }
 .fivethSlideCardPoint {
-  width: 45px;
+  width: 35px;
   height: 35px;
-  border: 3px solid rgb(85, 227, 69);
-  border-top-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border: 3px solid RGB(220, 252, 231);
+  border-radius: 9999px;
 
-  background-color: white;
-  margin-left: 30px;
-  margin-top: 30px;
+  background-color: RGB(220, 252, 231);
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -271,4 +275,255 @@
 
 .fivethSlideButton:hover {
   background-color: #16a34a;
+}
+/* --- Основной контейнер секции --- */
+.sectionContainer {
+  background: linear-gradient(
+    to bottom right,
+    #2563eb,
+    #312e81
+  ); /* bg-gradient-to-br from-blue-600 to-indigo-800 */
+  color: #ffffff;
+  padding: 5rem 1.5rem; /* 80px 24px */
+}
+
+.contentWrapper {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* --- Заголовок и подзаголовок --- */
+.title {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 700;
+  max-width: 48rem; /* 768px */
+  margin: 0 auto;
+}
+
+.subtitle {
+  margin-top: 1rem;
+  font-size: 1.125rem; /* 18px */
+  color: #dbeafe; /* text-blue-200 */
+}
+
+/* --- Сетка для карточек --- */
+.cardsGrid {
+  margin-top: 4rem; /* 64px */
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem; /* 32px */
+}
+
+/* Адаптивность сетки */
+@media (min-width: 768px) {
+  .cardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- Стили для одной карточки --- */
+.infoCard {
+  background-color: #ffffff;
+  color: #1f2937; /* text-gray-800 */
+  padding: 2rem; /* 32px */
+  text-align: left;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-2xl */
+  transition: transform 0.3s ease-in-out;
+
+  /* Уникальная форма */
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.infoCard:hover {
+  transform: translateY(-0.5rem); /* hover:-translate-y-2 */
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.iconWrapper {
+  background-color: #dcfce7; /* bg-green-100 */
+  padding: 0.5rem; /* 8px */
+  border-radius: 9999px; /* rounded-full */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  color: #16a34a; /* text-green-600 */
+  width: 24px;
+  height: 24px;
+}
+
+.cardTitle {
+  margin-left: 1rem;
+  font-size: 1.5rem; /* 24px */
+  font-weight: 700;
+}
+
+.cardText {
+  color: #4b5563; /* text-gray-600 */
+}
+
+/* --- Кнопка --- */
+.buttonContainer {
+  margin-top: 4rem; /* 64px */
+}
+
+.ctaButton {
+  background-color: #22c55e; /* bg-green-500 */
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.125rem; /* 18px */
+  padding: 1rem 2.5rem; /* 16px 40px */
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.ctaButton:hover {
+  background-color: #16a34a; /* hover:bg-green-600 */
+}
+/* --- Основной контейнер --- */
+.mainContainer {
+  width: 100%;
+}
+
+/* --- Секция с контентом --- */
+.contentSection {
+  background-color: #f8fafc; /* Светло-серый фон */
+  color: #111827; /* Темный текст */
+  padding: 5rem 1.5rem; /* 80px 24px */
+}
+
+.sectionHeader {
+  text-align: center;
+  max-width: 48rem; /* 768px */
+  margin: 0 auto 4rem; /* 64px отступ снизу */
+}
+
+.sectionTitle {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* --- Контейнер для карточек --- */
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem; /* 64px */
+}
+
+/* --- Стили для одной карточки --- */
+.card {
+  display: flex;
+  flex-direction: column; /* Мобильный вид по умолчанию */
+  width: 100%;
+  max-width: 900px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* Важно для скругления углов у изображения */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+  /* Уникальная форма */
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.card:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Десктопный вид */
+@media (min-width: 1024px) {
+  .card {
+    flex-direction: row; /* Возвращаем вид "картинка слева" */
+    height: 430px;
+  }
+}
+
+/* --- Изображение в карточке --- */
+.cardImage {
+  width: 100%;
+  height: 250px; /* Высота на мобильных */
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .cardImage {
+    width: 50%;
+    height: 100%;
+    border-top-left-radius: 50px; /* Скругление только на десктопе */
+  }
+}
+
+/* --- Контент в карточке --- */
+.cardContent {
+  padding: 2rem; /* 32px */
+}
+
+@media (min-width: 1024px) {
+  .cardContent {
+    padding: 3rem; /* 48px */
+    width: 50%;
+  }
+}
+
+.contentTitle {
+  font-size: 1.875rem; /* 30px */
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.contentDescription {
+  color: #4b5563;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* --- Список --- */
+.contentList {
+  padding-left: 1.25rem;
+  margin-bottom: 2rem;
+  color: #4b5563;
+}
+
+.contentList li {
+  margin-bottom: 0.5rem;
+  list-style-type: disc;
+}
+
+/* --- Кнопка --- */
+.contentButton {
+  display: inline-block;
+  background-color: #1f2937; /* Темно-серый */
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.contentButton:hover {
+  background-color: #3b82f6; /* Синий при наведении */
+  transform: scale(1.05);
 }
