@@ -34,13 +34,31 @@ const Main = () => {
   useEffect(() => {
     if (slugs && Array.isArray(slugs)) {
       slugs.forEach(({ slug }) => {
-        Promise.all([
-          axios.get(`${link}/api/pages/${slug}`),
-          axios.get(`${link}/api/courses/${slug}`),
-        ])
-          .then(([res1, res2]) => {
-            console.log(`📦 Збережено у localStorage: ${slug}`)
+        const pageCached = localStorage.getItem(slug)
+        const coursesCached = localStorage.getItem(`${slug}Courses`)
+        // Перевіряємо, чи дані вже збережено — якщо так, пропускаємо
+        if (pageCached) {
+          return
+        }
+
+        axios
+          .get(`${link}/api/pages/${slug}`)
+
+          .then((res1) => {
             localStorage.setItem(slug, JSON.stringify(res1.data))
+          })
+          .catch((err) =>
+            console.error(`❌ Помилка при отриманні для ${slug}:`, err)
+          )
+        // Перевіряємо, чи дані вже збережено — якщо так, пропускаємо
+        if (coursesCached) {
+          return
+        }
+
+        axios
+          .get(`${link}/api/courses/${slug}`)
+
+          .then((res1) => {
             localStorage.setItem(`${slug}Courses`, JSON.stringify(res2.data))
           })
           .catch((err) =>
@@ -49,6 +67,7 @@ const Main = () => {
       })
     }
   }, [slugs])
+  //localStorage => slug: pages(vocablar, grammar), ${slug}Courses : courses(A1vocabualr, A2vocabular)
   const First = {
     id: 1,
     slug: 'home',
