@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
-import styles from './StylesNew.module.css'
+import styles from '../style.module.css'
+// import styles from './StylesNew.module.css'
 import { useState } from 'react'
 import React from 'react'
 const ExerciseMultipleChoice = ({ task }) => {
@@ -56,7 +57,7 @@ const ExerciseMultipleChoice = ({ task }) => {
       {/* Счет правильных и оставшихся вопросов */}
       <div className={styles.TaskBlockCardDescription}>
         <span>{task[1][taskNumber].taskdescription}</span>
-        <div>
+        <div style={{ textAlign: 'center' }}>
           <span>{remainder} items remaining</span>
           <span style={{ marginLeft: '15px' }}>
             ✅ Correct answers: {CorrectAnswersCount}

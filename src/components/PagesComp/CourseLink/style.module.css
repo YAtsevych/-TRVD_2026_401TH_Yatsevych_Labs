@@ -5,7 +5,12 @@
   display: flex;
   flex-direction: row;
   position: relative;
+  transition: transform 0.3s ease-in-out;
 }
+.CourseLink:hover {
+  transform: translateY(-0.5rem); /* hover:-translate-y-2 */
+}
+
 .CourseLinkImg {
   width: 400px;
   height: 240px;

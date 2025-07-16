@@ -1,7 +1,6 @@
 import styles from './style.module.css'
 import React from 'react'
 const FirstView = ({ data }) => {
-  console.log(data)
   const styleSpecial =
     typeof data.stylespecial === 'string'
       ? JSON.parse(data.stylespecial)

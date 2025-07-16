@@ -1,15 +1,3 @@
-.TaskContainer {
-  width: 100%;
-}
-.TaskTitle {
-  width: 100%;
-  height: 50px;
-  background-color: rgba(35, 8, 90, 0.15);
-  display: flex;
-  align-items: center;
-  padding-left: 20px;
-  font-size: 20px;
-}
 .TaskMainLine {
   margin-top: 10px;
 }

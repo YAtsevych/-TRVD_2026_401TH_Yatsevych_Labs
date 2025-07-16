@@ -1,5 +1,7 @@
 import { useParams } from 'react-router-dom'
-import styles from './StylesNew.module.css' // Возвращаем импорт CSS Modules
+// import styles from './StylesNew.module.css' // Возвращаем импорт CSS Modules
+
+import styles from '../style.module.css'
 import { useState } from 'react'
 import React from 'react'
 import { useDroppable, useDraggable } from '@dnd-kit/core' // Предполагается, что вы используете dnd-kit
@@ -104,11 +106,14 @@ const ExerciseWordMatching = ({ task }) => {
         ))}
       </div>
 
+      {/* Счет правильных и оставшихся вопросов */}
       <div className={styles.TaskBlockCardDescription}>
-        <span>{currentTask.taskdescription}</span>
-        <div className={styles.TaskCounters}>
-          <span>Осталось: {remainder}</span>
-          <span>✅ Правильно: {correctAnswersCount}</span>
+        <span>{task[1][taskNumber].taskdescription}</span>
+        <div>
+          <span>{remainder} items remaining</span>
+          <span style={{ marginLeft: '15px' }}>
+            ✅ Correct answers: {correctAnswersCount}
+          </span>
         </div>
       </div>
 

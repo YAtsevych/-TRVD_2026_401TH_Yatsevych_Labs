@@ -1,7 +1,7 @@
 import express from 'express'
 import pool from '../DB/db.js' // підключення до PostgreSQL через pg
 import { MY_LANGUAGE_ROM } from '../config.js'
-import fs from 'fs'
+
 const apiHeader = express.Router()
 
 apiHeader.get('/', async (req, res) => {

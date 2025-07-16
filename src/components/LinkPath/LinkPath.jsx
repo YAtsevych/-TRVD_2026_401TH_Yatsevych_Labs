@@ -19,7 +19,7 @@ const LinkPath = (params) => {
   return (
     <div className={styles.path}>
       {pathArray.map((link, index) => (
-        <div key={index}>
+        <div key={index} className={styles.link}>
           <NavLink to={link.path} className={styles.pathlink}>
             {link.title}
           </NavLink>

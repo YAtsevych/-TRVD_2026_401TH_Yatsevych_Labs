@@ -1,22 +1,54 @@
+/* --- Основной контейнер для всего списка задач --- */
 .TaskContainer {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Расстояние между задачами (16px) */
+  max-width: 56rem; /* Ограничиваем максимальную ширину (896px) */
+  margin: 2rem auto; /* Центрируем контейнер и добавляем отступы */
 }
+/* --- Кликабельный заголовок аккордеона --- */
 .TaskTitle {
   background-color: #ffffff; /* bg-white */
   border: 1px solid #e5e7eb; /* border border-gray-200 */
   border-radius: 0.75rem; /* rounded-xl */
   overflow: hidden; /* overflow-hidden */
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  gap: 1rem; /* Расстояние между номером и текстом (16px) */
+  padding: 2rem; /* Отступы (20px) */
+
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
+.TaskTitle:hover {
+  background-color: #f9fafb; /* Очень светлый серый при наведении */
+}
+
+/* --- Обёртка для одного элемента аккордеона (заголовок + контент) --- */
 .TaskMainLine {
-  margin-top: 10px;
+  background-color: #ffffff;
+
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600; /* Полужирный */
+  transition: box-shadow 0.3s ease;
+  color: #1f2937; /* Темно-серый текст */
 }
+
+/* --- Блок со скрытым контентом --- */
 .TaskBlock {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #ebeff0;
   position: relative;
+  border-top: 1px solid #e5e7eb; /* Линия, отделяющая контент от заголовка */
+  background-color: #ffffff; /* Фон для контента */
 }
 .TaskBlockFrameFirst {
   width: 97%;
@@ -28,6 +60,7 @@
   flex-direction: column;
   padding: 10px 0px;
 }
+
 .TaskBlockCard {
   width: 97%;
   height: 95%;
@@ -36,62 +69,152 @@
   padding-top: 25px;
 }
 .TaskBlockCardTitle {
-  font-size: 18px;
-  color: #00953b;
+  font-size: 22px;
+  color: black;
+  font-weight: 700;
+  text-align: center;
 }
-.TaskBlockCardDescription {
-  font-size: 10px;
 
-  color: rgba(0, 0, 0, 0.5);
+.TaskBlockCardDescription {
+  font-size: 1rem;
   display: flex;
   justify-content: space-between;
-  padding-right: 60px;
+  padding-right: 5px;
+  color: #6b7280;
+  margin-bottom: 1.5rem; /* 24px */
+  align-items: end; /* ////////////////////////////////////////////??????? */
 }
-.TaskBlockSubmitButton {
+
+/* .TaskBlockSubmitButton {
   padding: 2px 10px;
   font-size: 13px;
   color: #048739;
   border-radius: 5px;
   border: 1px solid #658606;
   margin-left: 15px;
+} */
+.TaskBlockExplanationBlock {
+  width: 96%;
+  border-radius: 10px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fef9c3;
+  padding: 8px 13px;
+  font-weight: 600;
 }
 .TaskBlockExplanation {
   padding-right: 75px;
   margin-top: 10px;
 }
+
+/* Check Button */
 .TaskBlockNavButton {
   width: 150px;
-  margin-bottom: 15px;
-  padding: 2px 30px;
-  border-radius: 5px;
-  border: 1px solid #00953b;
   font-size: 15px;
-  color: #00953b;
+  display: inline-flex; /* Используем inline-flex для выравнивания иконки и текста */
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; /* 8px расстояние между текстом и иконкой */
   margin-right: 25px;
+  margin-bottom: 15px;
+  /* Цвета и фон */
+  background-color: #3b82f6; /* синий фон */
+  color: #ffffff; /* белый текст */
+
+  /* Текст */
+  font-weight: 700; /* жирный шрифт */
+
+  /* Отступы, рамка и скругление */
+  padding: 0.75rem 1.5rem; /* 12px по вертикали, 24px по горизонтали */
+  border: none;
+  border-radius: 0.5rem; /* 8px скругление углов */
+
+  /* Тень для объема */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  /* Анимация и курсор */
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.TaskBlockNavButton:hover {
+  background-color: #1d4ed8;
+}
+.TaskBlockNavButton:disabled {
+  background-color: #dad3d3;
+  cursor: not-allowed;
 }
 .TaskBlockNavButtonsBlock {
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
 }
-.TaskBlockNavButton:disabled {
-  background-color: #dad3d3;
-}
+
 .TaskBlockOptionButton {
-  display: block;
-  width: 150px;
-  border-radius: 7px;
-  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
   margin-right: 20px;
-  border: 2px solid rgb(164, 160, 160);
   padding-left: 5px;
+  /* Отступы и рамка */
+  padding: 1rem; /* 16px */
+  border: 2px solid #d1d5db; /* серая рамка */
+  border-radius: 0.5rem; /* 8px скругление углов */
   min-height: 27.5px;
-  margin-top: 5px;
-}
-.TaskBlockOptionButtonActive {
-  background-color: #67d48d;
+  /* Текст */
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  text-align: left;
+
+  /* Цвета и фон */
+  background-color: #ffffff;
+  color: #1f2937;
+
+  /* Анимация и курсор */
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
+.TaskBlockOptionButton:hover {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+/* Использованный элемент */
+.TaskBlockOptionButton.used {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f9fafb;
+}
+/* Стиль для активной (выбранной) кнопки до проверки */
+
+.TaskBlockOptionButtonActive {
+  background-color: #3b82f6;
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+/* Стиль для заблокированных кнопок */
+.TaskBlockOptionButton:disabled {
+  cursor: not-allowed;
+}
+
+/* Чтобы цвета не блекли у правильного/неправильного ответа */
+.TaskBlockOptionButton.correct:disabled,
+.TaskBlockOptionButton.incorrect:disabled {
+  opacity: 1;
+}
+
+/* Остальные заблокированные кнопки делаем полупрозрачными */
+.TaskBlockOptionButton:disabled:not(.correct):not(.incorrect) {
+  opacity: 0.6;
+}
+.TaskBlockOptionButton:not(:disabled):hover {
+  border-color: #6b7280;
+  background-color: #f9fafb;
+}
 .WordPuzzleItem {
   height: 40px;
   padding: 5px;
@@ -117,6 +240,7 @@
   border-radius: 10px;
   margin-right: 10px;
 }
+
 .DropZoneDefault {
   background-color: white;
   border: 1px solid #413f3f;
@@ -149,45 +273,6 @@
   margin-right: 10px;
   margin-top: 5px;
 }
-.TaskMainLineNumber {
-  width: 35px;
-  height: 35px;
-  background-color: RGB(219, 234, 254);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  color: RGB(37, 99, 235);
-}
-/* --- Основной контейнер для всего списка задач --- */
-.TaskContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem; /* Расстояние между задачами (16px) */
-  max-width: 56rem; /* Ограничиваем максимальную ширину (896px) */
-  margin: 2rem auto; /* Центрируем контейнер и добавляем отступы */
-}
-
-/* --- Обёртка для одного элемента аккордеона (заголовок + контент) --- */
-.TaskMainLine {
-  background-color: #ffffff;
-
-  transition: box-shadow 0.3s ease;
-}
-
-/* --- Кликабельный заголовок аккордеона --- */
-.TaskTitle {
-  display: flex;
-  align-items: center;
-  gap: 1rem; /* Расстояние между номером и текстом (16px) */
-  padding: 1.25rem; /* Отступы (20px) */
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.TaskTitle:hover {
-  background-color: #f9fafb; /* Очень светлый серый при наведении */
-}
 
 /* --- Кружок с номером задания --- */
 .TaskMainLineNumber {
@@ -204,18 +289,370 @@
   flex-shrink: 0; /* Предотвращает сжатие кружка */
 }
 
-/* --- Текст заголовка задания --- */
-.TaskMainLine {
-  font-size: 1.125rem; /* 18px */
-  font-weight: 600; /* Полужирный */
-  color: #1f2937; /* Темно-серый текст */
+.TaskBlockCardQueshionBlock {
+  width: 96%;
+  background-color: #f3f4f6;
+  height: 75px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.TaskBlockCardAnswerBlock {
+  width: 96%;
+  background-color: #ffffff;
+  height: 75px;
+  border-radius: 15px;
+  border: 2px dashed RGB(209, 213, 219);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.TaskBlockCardAudioBtn {
+  border: 1px solid #f3f4f6;
+  position: absolute;
+  right: 15px;
+  top: 8px;
+  width: 25px;
+  cursor: pointer;
 }
 
-/* --- Блок со скрытым контентом --- */
-.TaskBlock {
-  /* Анимация высоты и отступов управляется инлайн-стилями в вашем JSX.
-    Этот класс можно использовать для дополнительного оформления, если потребуется.
-  */
-  border-top: 1px solid #e5e7eb; /* Линия, отделяющая контент от заголовка */
-  background-color: #ffffff; /* Фон для контента */
+.TaskBlockCardAnswers {
+  margin-top: 10px;
+  width: 96%;
+  display: grid;
+  grid-template-columns: 1fr; /* Одна колонка по умолчанию */
+  gap: 1rem;
+}
+@media (min-width: 670px) {
+  .TaskBlockCardAnswers {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.TaskBlockHintButton {
+  border: 0px solid white;
+  background-color: transparent;
+  font-size: 17px;
+  font-weight: 700;
+  color: #6b7281;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.TaskBlockResultBlockCorrect {
+  width: 96%;
+  border-radius: 10px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #dcfce7;
+  padding: 8px 13px;
+  font-weight: 600;
+  color: #1f6b3f;
+}
+
+.TaskBlockResultBlockIncorrect {
+  width: 96%;
+  border-radius: 10px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fee2e2;
+  padding: 8px 13px;
+  font-weight: 600;
+  color: #9d2b53;
+}
+
+/* --- Основной контейнер задания --- */
+.TaskBlockContainer {
+  font-family: sans-serif;
+  background-color: #ffffff;
+  border-radius: 1rem; /* 16px */
+  padding: 2rem; /* 32px */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.TaskCounters {
+  display: flex;
+  gap: 1rem; /* 16px */
+}
+
+.TaskBlockCardQueshion {
+  font-size: 1.1rem;
+}
+
+/* --- Контейнер для трех колонок --- */
+.ColumnsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem; /* 24px */
+  align-items: start;
+}
+
+.TaskColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* 12px */
+}
+
+/* --- Стили для элементов в колонках --- */
+.TaskBlockOptionButton,
+.OptionItemStatic,
+.DropZone {
+  width: 100%;
+  min-height: 54px; /* Фиксированная высота для выравнивания */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem; /* 12px */
+  border-radius: 0.5rem; /* 8px */
+  font-size: 1rem; /* 16px */
+  font-weight: 600;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Элементы в левой колонке (статичные) */
+.OptionItemStatic {
+  background-color: #f3f4f6;
+  color: #1f2937;
+  border: 2px solid #e5e7eb;
+}
+
+/* --- Стили для Drop-зон --- */
+.DropZone {
+  border: 2px dashed #9ca3af;
+  transition: all 0.2s ease;
+}
+
+.DropZonePlaceholder {
+  color: #9ca3af;
+}
+
+/* Стили для Drop-зон после проверки */
+.DropZone.correct {
+  border-style: solid;
+  border-color: #22c55e;
+  background-color: #f0fdf4;
+  color: #166534;
+}
+
+.DropZone.incorrect {
+  border-style: solid;
+  border-color: #ef4444;
+  background-color: #fef2f2;
+  color: #991b1b;
+}
+
+/* Стиль для ПРАВИЛЬНОГО ответа (после проверки) */
+.correct {
+  border-color: #22c55e; /* зеленый */
+  background-color: #f0fdf4; /* светло-зеленый */
+  color: #166534;
+}
+
+/* Стиль для НЕПРАВИЛЬНОГО ответа (после проверки) */
+.incorrect {
+  border-color: #ef4444; /* красный */
+  background-color: #fef2f2; /* светло-красный */
+  color: #991b1b;
+}
+/* --- Основной контейнер задания --- */
+.taskContainer {
+  width: 100%;
+  max-width: 48rem; /* 768px */
+  margin: 2rem auto;
+  background-color: #ffffff;
+  border-radius: 1rem; /* 16px */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem; /* 24px */
+  border: 1px solid #e5e7eb;
+}
+
+@media (min-width: 768px) {
+  .taskContainer {
+    padding: 2rem; /* 32px */
+  }
+}
+
+/* --- Заголовок и счетчики --- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.taskTitle {
+  font-size: 1.25rem; /* 20px */
+  font-weight: 700;
+  color: #16a34a; /* text-green-600 */
+}
+
+.taskDescription {
+  margin-top: 0.25rem;
+  font-size: 0.875rem; /* 14px */
+  color: #6b7280; /* text-gray-500 */
+}
+
+.counters {
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-align: right;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.correctCounter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  font-weight: 600;
+  color: #16a34a;
+}
+
+.checkIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* --- Блок с предложением на английском --- */
+.englishSentence {
+  background-color: #f9fafb; /* bg-gray-50 */
+  padding: 1rem;
+  border-radius: 0.75rem; /* 12px */
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.125rem; /* 18px */
+  color: #1f2937;
+}
+
+/* --- Зоны для слов --- */
+.zoneTitle {
+  font-weight: 600;
+  color: #374151; /* text-gray-700 */
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Зона ответа */
+.answerContainer {
+  min-height: 68px;
+  background-color: #ffffff;
+  padding: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  border: 2px dashed #d1d5db; /* border-gray-300 */
+  border-radius: 0.75rem;
+  transition: border-color 0.3s;
+}
+
+/* Контейнер с доступными словами */
+.availableWordsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+/* --- Стили для слова-кнопки --- */
+.wordButton {
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: 2px solid #d1d5db;
+  background-color: #ffffff;
+  color: #1f2937;
+}
+
+.wordButton:not(:disabled):hover {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+/* --- Кнопки действий --- */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.5rem;
+}
+
+.hintButton {
+  font-weight: 600;
+  color: #6b7280;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hintButton:hover {
+  color: #3b82f6;
+}
+
+.checkButton {
+  background-color: #4b5563; /* bg-gray-600 */
+  color: #ffffff;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  border: none;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.checkButton:hover {
+  background-color: #374151;
+}
+
+.checkButton:disabled {
+  background-color: #d1d5db;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* --- Стили для результатов проверки --- */
+.answerContainer.correct {
+  border-color: #22c55e;
+  background-color: #f0fdf4;
+}
+
+.answerContainer.incorrect {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.resultBannerIncorrect {
+  text-align: center;
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  background-color: #fee2e2;
+  color: #991b1b;
 }

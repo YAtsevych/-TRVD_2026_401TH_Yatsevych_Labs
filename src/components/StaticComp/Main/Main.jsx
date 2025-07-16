@@ -1,5 +1,7 @@
 import styles from './style.module.css'
 import React from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {
   HomeBigCardSecondSlide,
@@ -14,6 +16,39 @@ import {
 import FirstView from '../../PagesComp/FirstView/FirstView.jsx'
 import PreFooter from '../PreFooter/PreFooter.jsx'
 const Main = () => {
+  const [slugs, setSlugs] = useState(null)
+  const link = `${import.meta.env.VITE_API_URL}`
+
+  // 1. Отримуємо всі slug-и
+  useEffect(() => {
+    axios
+      .get(`${link}/api/apiPagesAll/slugs`)
+      .then((res) => {
+        console.log('✅ Slugs отримано:', res.data)
+        setSlugs(res.data) // [{ slug: "home" }, { slug: "about" }]
+      })
+      .catch((err) => console.error('❌ Помилка при отриманні slug-ів:', err))
+  }, [])
+
+  // 2. Для кожного slug — підгружаємо і кешуємо дані
+  useEffect(() => {
+    if (slugs && Array.isArray(slugs)) {
+      slugs.forEach(({ slug }) => {
+        Promise.all([
+          axios.get(`${link}/api/pages/${slug}`),
+          axios.get(`${link}/api/courses/${slug}`),
+        ])
+          .then(([res1, res2]) => {
+            console.log(`📦 Збережено у localStorage: ${slug}`)
+            localStorage.setItem(slug, JSON.stringify(res1.data))
+            localStorage.setItem(`${slug}Courses`, JSON.stringify(res2.data))
+          })
+          .catch((err) =>
+            console.error(`❌ Помилка при отриманні для ${slug}:`, err)
+          )
+      })
+    }
+  }, [slugs])
   const First = {
     id: 1,
     slug: 'home',

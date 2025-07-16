@@ -21,7 +21,7 @@ const LessonPages = ({ lesson, tasks }) => {
             <div className={styles.LessonPageFirstColumn}>
               <div className={styles.LessonPageFirstColumnTitle}>
                 <LinkPath {...path} />
-                <h1>{lesson.lessontitle}</h1>
+                <h1 className={styles.LessonPageTitle}>{lesson.lessontitle}</h1>
               </div>
               <div
                 className={styles.LessonPageFirstColumnDescription}
