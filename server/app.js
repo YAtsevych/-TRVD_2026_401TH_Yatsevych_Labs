@@ -9,13 +9,13 @@ import apiRegistration from './api/apiRegistration.js'
 import apiTaskGeneration from './api/apiEnglishTaskAI.js'
 import apiPagesAll from './api/apiPagesAll.js'
 const app = express()
-app.use(cors())
 app.use(
-  express.json({
-    origin: 'https://con-dyp1.onrender.com',
+  cors({
+    origin: ['http://localhost:5173', 'https://con-dyp1.onrender.com'],
     credentials: true,
   })
 )
+app.use(express.json())
 app.use('/api/Header', headerRoute)
 app.use('/api/pages', pagesRoute)
 app.use('/api/courses', courseRoute)
