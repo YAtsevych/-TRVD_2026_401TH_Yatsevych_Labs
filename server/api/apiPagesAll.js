@@ -6,27 +6,29 @@ const apiPagesAll = express.Router()
 
 // /routes/apiPagesAll.js (або будь-який інший файл маршруту)
 apiPagesAll.get('/:type/:slug', async (req, res) => {
-  const type = req.params.type
-  const slug = req.params.slug
+  const { type, slug } = req.params
+
   try {
     if (type === 'slugs') {
       const sql = `SELECT slug FROM pages`
       const result = await conn.query(sql)
+      return res.json(result.rows) // ✅ return
+    }
 
-      res.json(result.rows) // [{ slug: 'home' }, { slug: 'about' }, ...]
-    } else if (type === 'slugs2') {
+    if (type === 'slugs2') {
       if (!slug) {
         return res.status(400).json({ error: 'Slug is required for slugs2' })
       }
-      const sql = `SELECT slug2 FROM courses Join pages on courseconection = idpages where slug = $1 `
+      const sql = `SELECT slug2 FROM courses JOIN pages ON courseconection = idpages WHERE slug = $1`
       const result = await conn.query(sql, [slug])
-
-      res.json(result.rows) // [{ slug: 'home' }, { slug: 'about' }, ...]
+      return res.json(result.rows) // ✅ return
     }
+
+    // ⛔️ спрацює тільки якщо жодна з умов вище не виконалась
     return res.status(400).json({ error: `Unknown type: ${type}` })
   } catch (err) {
     console.error('❌ Error fetching slugs:', err)
-    res.status(500).json({ error: 'Internal server error' })
+    return res.status(500).json({ error: 'Internal server error' })
   }
 })
 

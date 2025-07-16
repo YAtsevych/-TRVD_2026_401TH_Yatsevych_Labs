@@ -56,27 +56,28 @@ const MainPages = () => {
       .catch((err) => console.error('❌ Помилка при отриманні slug2-ів:', err))
   }, [slug])
 
-  // 2. Для кожного slug2 — підгружаємо і кешуємо дані
-  useEffect(() => {
-    if (slugs2 && Array.isArray(slugs2)) {
-      slugs2.forEach(({ slug2 }) => {
-        const key = `${slug}CourseLessons_${slug2}` // Ключ унікальний для кожного уроку
-        const cachedLesson = localStorage.getItem(key)
+  // // 2. Для кожного slug2 — підгружаємо і кешуємо дані
+  // useEffect(() => {
+  //   if (slugs2 && Array.isArray(slugs2)) {
+  //     slugs2.forEach(({ slug2 }) => {
+  //       const key = `${slug}CourseLessons_${slug2}` // Ключ унікальний для кожного уроку
+  //       const cachedLesson = localStorage.getItem(key)
 
-        if (!cachedLesson) {
-          axios
-            .get(`${link}/api/lessons/${slug}/${slug2}`)
-            .then((res) => {
-              localStorage.setItem(key, JSON.stringify(res.data))
-            })
-            .catch((err) =>
-              console.error(`❌ Помилка при отриманні уроку ${slug2}:`, err)
-            )
-        } else {
-        }
-      })
-    }
-  }, [slugs2, slug])
+  //       if (!cachedLesson) {
+  //         axios
+  //           .get(`${link}/api/lessons/${slug}/${slug2}`)
+  //           .then((res) => {
+  //             localStorage.setItem(key, JSON.stringify(res.data))
+  //           })
+  //           .catch((err) =>
+  //             console.error(`❌ Помилка при отриманні уроку ${slug2}:`, err)
+  //           )
+  //       } else {
+  //         return
+  //       }
+  //     })
+  //   }
+  // }, [slugs2, slug])
   return (
     <>
       {page ? (
