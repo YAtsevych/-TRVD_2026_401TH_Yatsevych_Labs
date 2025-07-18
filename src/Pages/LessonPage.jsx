@@ -8,7 +8,7 @@ import CreateExerciseForVocabular from '../resoures/CreateExerciseForVocabular'
 
 import LessonPageVocabular from '../components/Lessons/Vocabular/LessonPageVocabular'
 import LessonPageGrammar from '../components/Lessons/Grammar/LessonPageGrammar'
-
+import LessonPageReading from '../components/Lessons/Reading/LessonPageReading.jsx'
 const LessonPage = () => {
   const { slug, slug2, slug3 } = useParams()
   const [lessond, setLesson] = useState(null)
@@ -37,8 +37,12 @@ const LessonPage = () => {
   const LessonPageComponentMap = {
     vocabular: LessonPageVocabular,
     grammar: LessonPageGrammar,
+    reading: LessonPageReading,
   }
-  const Component = LessonPageComponentMap[slug] || DefaultLessonPage
+  const Component =
+    slug === 'skills'
+      ? LessonPageComponentMap[slug2]
+      : LessonPageComponentMap[slug] || LessonPages
   return (
     <>
       <Component lesson={lessond} tasks={tasks}></Component>

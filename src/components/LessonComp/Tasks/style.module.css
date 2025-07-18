@@ -292,13 +292,38 @@
 .TaskBlockCardQueshionBlock {
   width: 96%;
   background-color: #f3f4f6;
-  height: 75px;
+  min-height: 75px;
   border-radius: 15px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   position: relative;
+  padding: 15px;
+}
+.TaskBlockCardQueshionInput {
+  /* --- Новые стили для современного вида --- */
+  width: 100%;
+  max-width: 24rem; /* Ограничиваем максимальную ширину для больших экранов */
+  height: 3.5rem; /* Увеличиваем высоту (56px) */
+  text-align: center; /* Центрируем текст */
+  font-size: 1.5rem; /* Увеличиваем шрифт (24px) */
+  font-weight: 600; /* Делаем шрифт полужирным */
+
+  /* --- Обновленные стили рамки и скругления --- */
+  border: 2px solid #d1d5db; /* Рамка толщиной 2px */
+  border-radius: 0.5rem; /* Скругление углов (8px) */
+
+  /* --- Убираем тень и добавляем плавный переход --- */
+  box-shadow: none;
+  transition: all 0.2s ease-in-out;
+}
+
+/* --- Добавляем стили для состояния фокуса (когда пользователь кликает на поле) --- */
+.TaskBlockCardQueshionInput:focus {
+  border-color: #3b82f6; /* Синяя рамка при фокусе */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Легкое свечение */
+  outline: none; /* Убираем стандартный аутлайн браузера */
 }
 .TaskBlockCardAnswerBlock {
   width: 96%;

@@ -22,9 +22,8 @@ const Main = () => {
   // 1. Отримуємо всі slug-и
   useEffect(() => {
     axios
-      .get(`${link}/api/apiPagesAll/slugs`)
+      .get(`${link}/api/apiPagesAll/slugs/placeholder`)
       .then((res) => {
-        console.log('✅ Slugs отримано:', res.data)
         setSlugs(res.data) // [{ slug: "home" }, { slug: "about" }]
       })
       .catch((err) => console.error('❌ Помилка при отриманні slug-ів:', err))
@@ -37,7 +36,7 @@ const Main = () => {
         const pageCached = localStorage.getItem(slug)
         const coursesCached = localStorage.getItem(`${slug}Courses`)
         // Перевіряємо, чи дані вже збережено — якщо так, пропускаємо
-        if (pageCached) {
+        if (slug === '' || pageCached) {
           return
         }
 
@@ -45,7 +44,7 @@ const Main = () => {
           .get(`${link}/api/pages/${slug}`)
 
           .then((res1) => {
-            localStorage.setItem(slug, JSON.stringify(res1.data))
+            localStorage.setItem(slug, JSON.stringify(res1.data[0]))
           })
           .catch((err) =>
             console.error(`❌ Помилка при отриманні для ${slug}:`, err)
@@ -59,7 +58,7 @@ const Main = () => {
           .get(`${link}/api/courses/${slug}`)
 
           .then((res1) => {
-            localStorage.setItem(`${slug}Courses`, JSON.stringify(res2.data))
+            localStorage.setItem(`${slug}Courses`, JSON.stringify(res1.data))
           })
           .catch((err) =>
             console.error(`❌ Помилка при отриманні для ${slug}:`, err)

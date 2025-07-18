@@ -1,7 +1,8 @@
 /* --- Секция Pre-Footer --- */
 .preFooter {
-  background-color: #1d4ed8; /* Темно-синий фон, как в дизайне */
-  color: #ffffff;
+  background-color: RGB(231, 240, 251); /* Темно-синий фон, как в дизайне */
+  color: black;
+  font-family: Inter;
 }
 
 .preFooterContainer {
@@ -14,9 +15,9 @@
 }
 
 .preFooterTitle {
-  font-size: 1.875rem; /* 30px */
+  font-size: 2.5rem; /* 30px */
   font-weight: 700;
-  margin-bottom: 2.5rem; /* 40px */
+  margin-bottom: 1rem; /* 40px */
 }
 
 /* --- Сетка для карточек --- */
@@ -24,33 +25,33 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem; /* 32px */
+  color: RGB(37, 99, 235);
 }
-
+.preFooterCard span {
+  font-weight: 600;
+  color: black;
+  margin-left: 0.5rem;
+}
 /* Адаптивность сетки */
 @media (min-width: 768px) {
   .preFooterCards {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 @media (min-width: 1024px) {
   .preFooterCards {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 /* --- Стили для одной карточки --- */
 .preFooterCard {
-  background-color: rgba(30, 64, 175, 0.5); /* Полупрозрачный синий */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   padding: 1.5rem; /* 24px */
   border-radius: 0.75rem; /* 12px */
-}
-
-.preFooterCardIcon {
-  margin: 0 auto 1rem; /* отступ снизу */
-
-  width: 80px;
-  height: 80px;
-  object-fit: cover; /* чтобы изображение не искажалось */
 }
 
 .preFooterCardTitle {
@@ -63,4 +64,32 @@
   color: #dbeafe; /* Светло-голубой текст */
   font-size: 0.875rem; /* 14px */
   line-height: 1.5;
+}
+.ctaButton {
+  display: inline-block;
+
+  background-color: #3b82f6;
+
+  color: #ffffff;
+
+  font-weight: 700;
+
+  font-size: 1.125rem;
+
+  padding: 1rem 2.5rem;
+
+  margin-top: 2rem;
+
+  border-radius: 9999px;
+
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  transition: all 0.2s ease-in-out;
+}
+
+.ctaButton:hover {
+  background-color: #2563eb;
+
+  transform: scale(1.05);
 }

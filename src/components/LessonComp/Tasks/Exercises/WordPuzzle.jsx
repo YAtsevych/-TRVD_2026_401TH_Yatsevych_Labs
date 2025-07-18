@@ -49,8 +49,11 @@ const WordPuzzle = ({ task }) => {
   }
 
   const handleSubmit = () => {
+    const userAnswer = placedWords.map((w) => w.text)
+    const isAnswerCorrect =
+      JSON.stringify(userAnswer) === JSON.stringify(correctAnswerArray)
     setIsSubmitted(true)
-    if (isCorrect) {
+    if (isAnswerCorrect) {
       setCorrectAnswersCount((prev) => prev + 1)
     }
   }
@@ -72,33 +75,62 @@ const WordPuzzle = ({ task }) => {
   function splitByUppercase(text) {
     return text.split(/(?=[A-Z])/)
   }
-  const slug2 = splitByDigit(path.slug2)
-  const slug3 = splitByUppercase(path.slug3)
+  const rawSlug2 = path.slug2
+  const rawSlug3 = path.slug3
 
+  let parsedSlug2 = null
+  let parsedSlug3 = []
+
+  if (rawSlug2 !== 'reading') {
+    parsedSlug2 = splitByDigit(rawSlug2)
+  }
+  parsedSlug3 = splitByUppercase(rawSlug3)
   return (
     <div className={styles.taskContainer}>
       {/* Заголовок и счетчики */}
       {/* Заглавие раздела "Vocabular A1: Food And Drinks" */}
       <div className={styles.TaskBlockCardTitle}>
-        <span style={{ textTransform: 'capitalize' }}>{path.slug}</span>{' '}
-        {slug2.level}:{' '}
-        {slug3.map((word, index) => (
+        <span style={{ textTransform: 'capitalize' }}>
+          {path.slug}{' '}
+          <span style={{ textTransform: 'capitalize' }}>
+            {parsedSlug2 ? parsedSlug2.level : path.slug2}
+            {''}
+          </span>
+        </span>
+        {''}:{' '}
+        {parsedSlug3.map((word, index) => (
           <span key={index} style={{ textTransform: 'capitalize' }}>
             {word + ' '}
           </span>
         ))}
       </div>
       {/* Счет правильных и оставшихся вопросов */}
-      <div className={styles.TaskBlockCardDescription}>
-        <span>{task[1][taskNumber].taskdescription}</span>
-        <div>
+      <div
+        className={styles.TaskBlockCardDescription}
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start', // ключевой момент — выравнивание по ВЕРХУ
+          flexWrap: 'wrap',
+        }}
+      >
+        <span style={{ maxWidth: '45%', marginRight: '10px' }}>
+          {task[1][taskNumber].taskdescription}
+        </span>
+
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column', // счетчики в столбик
+            gap: '5px',
+            marginRight: '25px',
+          }}
+        >
           <span>{task[1].length - taskNumber} items remaining</span>
-          <span style={{ marginLeft: '15px' }}>
-            ✅ Correct answers: {correctAnswersCount}
-          </span>
+          <span>✅ Correct answers: {correctAnswersCount}</span>
         </div>
       </div>
-      {/* Предложение на английском */}
+      {/*Предложение на английском */}
       <div
         className={styles.englishSentence}
         dangerouslySetInnerHTML={{ __html: currentTask.tasktext }}

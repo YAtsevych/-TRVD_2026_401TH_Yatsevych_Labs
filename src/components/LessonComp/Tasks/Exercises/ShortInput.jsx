@@ -15,7 +15,7 @@ const ShortInput = ({ task }) => {
 
   const handSubmit = () => {
     setSubmitted(true)
-    if (selected === task[1][taskNumber].CorrectAnswer) {
+    if (selected === task[1][taskNumber].correctanswer) {
       setCorrectAnswersCount((prev) => prev + 1)
     }
   }
@@ -33,37 +33,70 @@ const ShortInput = ({ task }) => {
   function splitByUppercase(text) {
     return text.split(/(?=[A-Z])/)
   }
-  const slug2 = splitByDigit(path.slug2)
-  const slug3 = splitByUppercase(path.slug3)
+  const rawSlug2 = path.slug2
+  const rawSlug3 = path.slug3
 
+  let parsedSlug2 = null
+  let parsedSlug3 = []
+
+  if (rawSlug2 !== 'reading') {
+    parsedSlug2 = splitByDigit(rawSlug2)
+  }
+  parsedSlug3 = splitByUppercase(rawSlug3)
   return (
     <>
       {/* Верхняя часть (ожидание: Vorcabular A1: topic) */}
       <div className={styles.TaskBlockCardTitle}>
-        <span style={{ textTransform: 'capitalize' }}>{path.slug}</span>{' '}
-        {slug2.level}:{' '}
-        {slug3.map((word, index) => (
+        <span style={{ textTransform: 'capitalize' }}>
+          {path.slug}{' '}
+          <span style={{ textTransform: 'capitalize' }}>
+            {parsedSlug2 ? parsedSlug2.level : path.slug2}
+            {''}
+          </span>
+        </span>
+        {''}:{' '}
+        {parsedSlug3.map((word, index) => (
           <span key={index} style={{ textTransform: 'capitalize' }}>
             {word + ' '}
           </span>
         ))}
       </div>
       {/* Описание задания + счет ответов */}
-      <div className={styles.TaskBlockCardDescription}>
-        <span>{task[1][taskNumber].taskdescription}</span>
-        <span>{remainder} items remaining</span>
-        <span style={{ marginLeft: '15px' }}>
-          ✅ Correct answers: {CorrectAnswersCount}
-        </span>
-      </div>
-      {/* Текст вопроса */}
-      <div
-        className={styles.TaskBlockCardQueshion}
-        dangerouslySetInnerHTML={{ __html: task[1][taskNumber].tasktext }}
-      ></div>
 
-      {/* Варианты ответа или поля ввода */}
-      <div className={styles.TaskBlockCardAnswers}>
+      <div
+        className={styles.TaskBlockCardDescription}
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start', // ключевой момент — выравнивание по ВЕРХУ
+          flexWrap: 'wrap',
+        }}
+      >
+        <span style={{ maxWidth: '45%', marginRight: '10px' }}>
+          {task[1][taskNumber].taskdescription}
+        </span>
+
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column', // счетчики в столбик
+            gap: '5px',
+            marginRight: '25px',
+          }}
+        >
+          <span>{task[1].length - taskNumber} items remaining</span>
+          <span>✅ Correct answers: {CorrectAnswersCount}</span>
+        </div>
+      </div>
+      {/* Блок с вопросом(слово + транскрипция + аудио) */}
+      <div
+        className={styles.TaskBlockCardQueshionBlock}
+        style={{ flexDirection: 'column' }}
+      >
+        <div
+          className={styles.TaskBlockCardQueshion}
+          dangerouslySetInnerHTML={{ __html: task[1][taskNumber].tasktext }}
+        ></div>
         {/* Слово к которому нужен перевод */}
         <div
           style={{
@@ -75,56 +108,62 @@ const ShortInput = ({ task }) => {
         >
           {task[1][taskNumber].options}
         </div>
-        {/* Input для ввода перевода */}
-
         <input
           type="text"
+          className={styles.TaskBlockCardQueshionInput}
           onChange={(e) => {
             setSelected(e.target.value)
           }}
           value={selected}
         />
-
-        {/* Результат перевірки */}
-        {submitted && (
-          <div>
-            {selected === task[1][taskNumber].correctanswer ? (
-              <span>Correct!</span>
-            ) : (
-              <span>
-                Incorrect. Correct answer {'  "'}
-                <span style={{ fontWeight: 'bold' }}>
-                  {task[1][taskNumber].correctanswer}
-                </span>
-                {'"'}
-              </span>
-            )}
-          </div>
-        )}
-
-        {/* Фінальний результат */}
-        {submitted && remainder === 0 && (
-          <div>
-            <span>
-              {CorrectAnswersCount} out of {task[1].length} correct
-            </span>
-          </div>
-        )}
-
-        {/* Підказка */}
-        {hint && (
-          <div className={styles.TaskBlockExplanation}>
-            <span
-              dangerouslySetInnerHTML={{
-                __html: task[1][taskNumber].explanation,
-              }}
-            ></span>
-          </div>
-        )}
       </div>
 
-      {/* Кнопка ПРоверки */}
+      {/* Варианты ответа или поля ввода */}
+
+      {/* Результат перевірки */}
+      {submitted && (
+        <>
+          {selected === task[1][taskNumber].correctanswer ? (
+            <div className={styles.TaskBlockResultBlockCorrect}>
+              <span>Correct!</span>
+            </div>
+          ) : (
+            <div className={styles.TaskBlockResultBlockIncorrect}>
+              <span>
+                Incorrect. Correct answer {'  "'}
+                <span>{task[1][taskNumber].correctanswer}</span>
+                {'"'}
+              </span>
+            </div>
+          )}
+        </>
+      )}
+
+      {/* Фінальний результат */}
+      {submitted && remainder === 0 && (
+        <div>
+          <span>
+            {CorrectAnswersCount} out of {task[1].length} correct
+          </span>
+        </div>
+      )}
+
+      {/* Підказка */}
+      {hint && (
+        <div className={styles.TaskBlockExplanationBlock}>
+          <span>{task[1][taskNumber].explanation}</span>
+        </div>
+      )}
+
+      {/* Блок с кнопками Подскаска и Проверить */}
       <div className={styles.TaskBlockNavButtonsBlock}>
+        <button
+          className={styles.TaskBlockHintButton}
+          onClick={() => setHint((prev) => !prev)}
+        >
+          ? Show hint
+        </button>
+
         <button
           onClick={() => {
             if (clicked) {
@@ -147,16 +186,6 @@ const ShortInput = ({ task }) => {
         >
           {clicked ? (remainder === 0 ? 'Done' : 'Next') : 'Check'}
         </button>
-
-        {/* Кнопка показа помощи */}
-        {task[1][taskNumber].explanation !== '' && (
-          <button
-            className={styles.TaskBlockNavButton}
-            onClick={() => setHint((prev) => !prev)}
-          >
-            Show hint
-          </button>
-        )}
       </div>
     </>
   )
