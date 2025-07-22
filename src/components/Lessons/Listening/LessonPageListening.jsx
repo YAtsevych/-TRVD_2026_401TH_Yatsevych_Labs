@@ -4,7 +4,7 @@ import LinkPath from '../../LinkPath/LinkPath.jsx'
 import styles from './style.module.css'
 
 import { useState } from 'react'
-const LessonPages = ({ lesson, tasks }) => {
+const LessonPageListening = ({ lesson, tasks }) => {
   const [loading, setLoading] = useState(false)
   const path = useParams()
 
@@ -35,4 +35,4 @@ const LessonPages = ({ lesson, tasks }) => {
     </>
   )
 }
-export default LessonPages
+export default LessonPageListening

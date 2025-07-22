@@ -1,14 +1,12 @@
-import PreFooter from '../components/StaticComp/PreFooter/PreFooter'
-import LessonPages from '../components/LessonComp/LessonPages'
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import axios from 'axios'
-import CreateExerciseForVocabular from '../resoures/CreateExerciseForVocabular'
-
-import LessonPageVocabular from '../components/Lessons/Vocabular/LessonPageVocabular'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import LessonPages from '../components/LessonComp/LessonPages'
 import LessonPageGrammar from '../components/Lessons/Grammar/LessonPageGrammar'
-import LessonPageReading from '../components/Lessons/Reading/LessonPageReading.jsx'
+import LessonPageReading from '../components/Lessons/Reading/LessonPageReading'
+import LessonPageVocabular from '../components/Lessons/Vocabular/LessonPageVocabular'
+import PreFooter from '../components/StaticComp/PreFooter/PreFooter'
+import CreateExerciseForVocabular from '../resoures/CreateExerciseForVocabular'
 const LessonPage = () => {
   const { slug, slug2, slug3 } = useParams()
   const [lessond, setLesson] = useState(null)
@@ -38,6 +36,7 @@ const LessonPage = () => {
     vocabular: LessonPageVocabular,
     grammar: LessonPageGrammar,
     reading: LessonPageReading,
+    listening: LessonPageListening,
   }
   const Component =
     slug === 'skills'

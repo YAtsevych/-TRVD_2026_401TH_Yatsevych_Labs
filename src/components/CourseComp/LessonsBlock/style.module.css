@@ -49,3 +49,49 @@
   flex-direction: column;
   gap: 45px;
 }
+/* --- Контейнер для кнопок пагинации --- */
+.paginationContainer {
+  display: flex;
+  gap: 0.5rem; /* 8px расстояние между кнопками */
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem; /* Отступ сверху */
+}
+
+/* --- Базовый стиль для кнопки пагинации --- */
+.paginationButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem; /* 40px */
+  height: 2.5rem; /* 40px */
+
+  /* Текст */
+  font-size: 1rem; /* 16px */
+  font-weight: 600;
+
+  /* Цвета и рамка */
+  background-color: #ffffff;
+  color: #4b5563; /* text-gray-600 */
+  border: 1px solid #d1d5db; /* border-gray-300 */
+  border-radius: 0.5rem; /* 8px скругление */
+
+  /* Анимация и курсор */
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+/* Стиль кнопки при наведении */
+.paginationButton:hover {
+  background-color: #f3f4f6; /* bg-gray-100 */
+  border-color: #9ca3af;
+}
+
+/* --- Стиль для АКТИВНОЙ кнопки (текущая страница) --- */
+.paginationButton.active {
+  background-color: #3b82f6; /* Синий фон */
+  color: #ffffff; /* Белый текст */
+  border-color: #3b82f6; /* Синяя рамка */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}

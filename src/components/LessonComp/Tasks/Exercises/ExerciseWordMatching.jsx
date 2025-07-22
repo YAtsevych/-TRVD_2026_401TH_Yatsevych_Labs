@@ -1,17 +1,11 @@
 import { useParams } from 'react-router-dom'
-// import styles from './StylesNew.module.css' // Возвращаем импорт CSS Modules
-
 import styles from '../style.module.css'
 import { useState } from 'react'
 import React from 'react'
-import { useDroppable, useDraggable } from '@dnd-kit/core' // Предполагается, что вы используете dnd-kit
-
-// --- Компоненты для перетаскивания (предполагается, что они в отдельном файле) ---
-// Вам нужно будет адаптировать их под вашу реализацию dnd-kit или другую библиотеку.
+import { useDroppable, useDraggable } from '@dnd-kit/core'
 
 function DraggableItem({ id, children, onClick, isUsed }) {
   const { setNodeRef } = useDraggable({ id })
-  // Динамически добавляем класс 'used'
   const finalClassName = `${styles.TaskBlockOptionButton} ${
     isUsed ? styles.used : ''
   }`
@@ -36,24 +30,39 @@ function DropZone({ id, children, onClick }) {
   )
 }
 
-// --- Основной компонент задания ---
 const ExerciseWordMatching = ({ task }) => {
   const path = useParams()
   const [submitted, setSubmitted] = useState(false)
   const [clicked, setClicked] = useState(false)
   const [taskNumber, setTaskNumber] = useState(0)
-  const [remainder, setRemainder] = useState(task?.[1]?.length - 1 || 0)
   const [assigned, setAssigned] = useState({})
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0)
   const [draggedId, setDraggedId] = useState(null)
 
+  // Текущая задача
   const currentTask = task?.[1]?.[taskNumber]
   if (!currentTask) return <div>Задача отсутствует</div>
 
-  const correctAnswers = currentTask.correctanswer?.Answers || []
-  const correctOptions = currentTask.correctanswer?.CorrectOption || []
+  // Парсим correctanswer из текущей задачи
+  let correctanswer
+  if (typeof currentTask.correctanswer === 'string') {
+    try {
+      correctanswer = JSON.parse(currentTask.correctanswer)
+    } catch {
+      correctanswer = currentTask.correctanswer
+    }
+  } else {
+    correctanswer = currentTask.correctanswer
+  }
+
+  const correctAnswers = correctanswer?.Answers || []
+  const correctOptions = correctanswer?.CorrectOption || []
   const options = currentTask.options || []
 
+  // Проверка, использован ли вариант
+  const isOptionUsed = (option) => Object.values(assigned).includes(option)
+
+  // Обработка клика на DropZone (зона сброса)
   const handleDropClick = (index) => {
     if (!submitted && draggedId) {
       setAssigned((prev) => ({ ...prev, [index]: draggedId }))
@@ -61,26 +70,30 @@ const ExerciseWordMatching = ({ task }) => {
     }
   }
 
+  // Проверка ответов при отправке
   const handleSubmit = () => {
     setSubmitted(true)
+
+    // Проверяем, что все правильно сопоставлено
     const isCorrect = correctAnswers.every(
       (answer, index) => assigned[index] === answer
     )
+
     if (isCorrect) {
       setCorrectAnswersCount((prev) => prev + 1)
     }
   }
 
+  // Переход к следующему заданию
   const goToNext = () => {
     setTaskNumber((prev) => (prev === task[1].length - 1 ? prev : prev + 1))
-    setRemainder((prev) => (prev === 0 ? prev : prev - 1))
     setSubmitted(false)
     setClicked(false)
     setAssigned({})
     setDraggedId(null)
   }
 
-  // Вспомогательные функции для парсинга заголовка
+  // Парсинг slug (можно подправить под свои нужды)
   function splitByDigit(text) {
     const match = text?.match(/^([A-Z]\d)(.+)$/i)
     return match ? { level: match[1], type: match[2] } : null
@@ -100,7 +113,6 @@ const ExerciseWordMatching = ({ task }) => {
     parsedSlug2 = splitByDigit(rawSlug2)
   }
   parsedSlug3 = splitByUppercase(rawSlug3)
-  const isOptionUsed = (option) => Object.values(assigned).includes(option)
 
   return (
     <div className={styles.TaskBlockContainer}>
@@ -109,10 +121,9 @@ const ExerciseWordMatching = ({ task }) => {
           {path.slug}{' '}
           <span style={{ textTransform: 'capitalize' }}>
             {parsedSlug2 ? parsedSlug2.level : path.slug2}
-            {''}
           </span>
         </span>
-        {''}:{' '}
+        :{' '}
         {parsedSlug3.map((word, index) => (
           <span key={index} style={{ textTransform: 'capitalize' }}>
             {word + ' '}
@@ -120,24 +131,23 @@ const ExerciseWordMatching = ({ task }) => {
         ))}
       </div>
 
-      {/* Счет правильных и оставшихся вопросов */}
       <div
         className={styles.TaskBlockCardDescription}
         style={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'flex-start', // ключевой момент — выравнивание по ВЕРХУ
+          alignItems: 'flex-start',
           flexWrap: 'wrap',
         }}
       >
         <span style={{ maxWidth: '45%', marginRight: '10px' }}>
-          {task[1][taskNumber].taskdescription}
+          {currentTask.taskdescription}
         </span>
 
         <div
           style={{
             display: 'flex',
-            flexDirection: 'column', // счетчики в столбик
+            flexDirection: 'column',
             gap: '5px',
             marginRight: '25px',
           }}
@@ -168,7 +178,6 @@ const ExerciseWordMatching = ({ task }) => {
             const assignedText = assigned[index] || ''
             const isCorrect = assignedText === correctAnswers[index]
 
-            // Формируем классы для drop-зоны
             let dropZoneClasses = styles.DropZone
             if (submitted) {
               dropZoneClasses += isCorrect
@@ -226,7 +235,11 @@ const ExerciseWordMatching = ({ task }) => {
           }}
           className={styles.TaskBlockNavButton}
         >
-          {clicked ? (remainder === 0 ? 'Завершить' : 'Далее') : 'Проверить'}
+          {clicked
+            ? task[1].length - taskNumber - 1 === 0
+              ? 'Завершить'
+              : 'Далее'
+            : 'Проверить'}
         </button>
       </div>
     </div>

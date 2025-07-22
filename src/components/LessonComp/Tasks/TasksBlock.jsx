@@ -1,33 +1,41 @@
 import { useState } from 'react'
-import styles from './style.module.css'
 import { useParams } from 'react-router-dom'
+import styles from './style.module.css'
 import Task from './Task.jsx'
-import React from 'react'
 const TasksBlock = ({ tasks }) => {
   const [activeIndex, setActiveIndex] = useState(null)
+  console.log(tasks)
   const path = useParams()
 
   const handleTaskClick = (index) => {
     setActiveIndex(activeIndex === index ? null : index)
   }
-  let TaskNumber = 0
+
+  const taskOrder = [
+    'MultipleChoice',
+    'WordMatching',
+    'WordPuzzle',
+    'ShortInput',
+  ]
+  let visibleTaskIndex = 1
   return (
     <div className={styles.TaskContainer}>
-      {Object.entries(tasks).map((type, index) => {
+      {taskOrder.map((typeName, index) => {
+        const taskGroup = tasks[typeName]
+        if (!taskGroup || taskGroup.length == 0) return null // если типа нет, пропускаем
+        const currentIndex = visibleTaskIndex++
         return (
-          <div key={index} className={styles.TaskMainLine}>
+          <div key={typeName} className={styles.TaskMainLine}>
             <div
               className={styles.TaskTitle}
               onClick={() => handleTaskClick(index)}
             >
-              <span className={styles.TaskMainLineNumber}>
-                {(TaskNumber = TaskNumber + 1)}
-              </span>
-              <span className={styles.TaskMainLine}>{type[0]}</span>
+              <span className={styles.TaskMainLineNumber}>{currentIndex}</span>
+              <span className={styles.TaskMainLine}>{typeName}</span>
             </div>
             <div
               style={{
-                maxHeight: activeIndex === index ? '1000px' : '0px', // задаём достаточно большой maxHeight
+                maxHeight: activeIndex === index ? '1000px' : '0px',
                 padding: activeIndex === index ? '16px' : '0px',
                 transition: 'max-height 0.3s ease',
                 overflow: 'hidden',
@@ -35,7 +43,7 @@ const TasksBlock = ({ tasks }) => {
               }}
               className={styles.TaskBlock}
             >
-              <Task task={type}></Task>
+              <Task task={[typeName, taskGroup]} />
             </div>
           </div>
         )

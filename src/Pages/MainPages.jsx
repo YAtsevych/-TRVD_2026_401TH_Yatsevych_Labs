@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import FirstView from '../components/PagesComp/FirstView/FirstView'
 import CoursesBlock from '../components/PagesComp/CoursesBlock/CoursesBlock'
+import FirstView from '../components/PagesComp/FirstView/FirstView'
 import PreFooter from '../components/StaticComp/PreFooter/PreFooter'
 
 const parseLocalObject = (data) => {
@@ -34,7 +34,7 @@ const MainPages = () => {
   const { slug } = useParams()
 
   const [page, setPage] = useState(null)
-  const [courses, setCourses] = useState(null)
+  const [courses, setCourses] = useState([])
   const [slugs2, setSlugs2] = useState(null)
 
   useEffect(() => {

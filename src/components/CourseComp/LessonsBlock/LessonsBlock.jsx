@@ -39,13 +39,16 @@ const LessonsBlock = ({
                   <LessonLink key={link.idlesson} data={link} />
                 ))}
             </div>
-            <div>
+            <div className={styles.paginationContainer}>
               {lessons &&
                 Array.from({ length: totalPages }, (_, i) => (
                   <button
                     key={i}
                     disabled={currentPage === i + 1}
                     onClick={() => setCurrentPage(i + 1)}
+                    className={`${styles.paginationButton} ${
+                      currentPage === i + 1 ? styles.active : ''
+                    }`}
                   >
                     {i + 1}
                   </button>

@@ -1,6 +1,6 @@
-import { useParams, Link } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import styles from '../style.module.css' // Подключаем новый файл стилей
-import React, { useState, useMemo, useEffect } from 'react'
 
 const WordPuzzle = ({ task }) => {
   const path = useParams()
@@ -20,7 +20,8 @@ const WordPuzzle = ({ task }) => {
 
   // Инициализация и сброс состояния при смене задания
   useEffect(() => {
-    const initialOptions = currentTask.options.map((word, index) => ({
+    const shuffledWords = shuffleArray(currentTask.options)
+    const initialOptions = shuffledWords.map((word, index) => ({
       id: `${taskNumber}-${index}`, // Уникальный ID для каждого слова
       text: word,
     }))
@@ -34,7 +35,15 @@ const WordPuzzle = ({ task }) => {
     const userAnswer = placedWords.map((w) => w.text)
     return JSON.stringify(userAnswer) === JSON.stringify(correctAnswerArray)
   }, [isSubmitted, placedWords, correctAnswerArray])
-
+  // --- рандомизация options
+  function shuffleArray(array) {
+    const shuffled = [...array] // Копия массива, чтобы не мутировать оригинал
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+    return shuffled
+  }
   // --- Обработчики действий ---
   const handleSelectWord = (wordObject) => {
     if (isSubmitted) return

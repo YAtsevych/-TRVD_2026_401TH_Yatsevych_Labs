@@ -2,9 +2,7 @@ import { useParams } from 'react-router-dom'
 import styles from '../style.module.css'
 // import styles from './StylesNew.module.css'
 import { useState } from 'react'
-import React from 'react'
 const ExerciseMultipleChoice = ({ task }) => {
-  console.log(task)
   const path = useParams()
   const [selected, setSelected] = useState(null)
   const [active, setActive] = useState(false)
