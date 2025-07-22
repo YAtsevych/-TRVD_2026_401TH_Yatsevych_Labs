@@ -1,17 +1,21 @@
-import express from 'express'
 import cors from 'cors'
-import headerRoute from './api/apiHeader.js'
-import pagesRoute from './api/apiPages.js'
+import express from 'express'
 import courseRoute from './api/apiCourses.js'
-import lessonsRoute from './api/apiLessons.js'
-import lessonRoute from './api/apiLessonOne.js'
-import apiRegistration from './api/apiRegistration.js'
 import apiTaskGeneration from './api/apiEnglishTaskAI.js'
+import headerRoute from './api/apiHeader.js'
+import lessonRoute from './api/apiLessonOne.js'
+import lessonsRoute from './api/apiLessons.js'
+import pagesRoute from './api/apiPages.js'
 import apiPagesAll from './api/apiPagesAll.js'
+import apiRegistration from './api/apiRegistration.js'
 const app = express()
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'https://con-dyp1.onrender.com'],
+    origin: [
+      'http://localhost:5173',
+      'https://con-dyp1.onrender.com',
+      'https://reactfront-9sll.onrender.com',
+    ],
     credentials: true,
   })
 )
