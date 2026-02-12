@@ -1,8 +1,9 @@
-import styles from './style.module.css'
-import CoursLink from '../CourseLink/CourseLink.jsx'
-import NavCoursePage from '../NavCoursePage/NavCoursePage.jsx'
-import React from 'react'
+import styles from "./style.module.css";
+import CoursLink from "../CourseLink/CourseLink.jsx";
+import NavCoursePage from "../NavCoursePage/NavCoursePage.jsx";
+import React from "react";
 const CoursesBlock = ({ data, courses }) => {
+  console.log(courses);
   return (
     <>
       <div className={styles.CoursesBlock}>
@@ -16,7 +17,7 @@ const CoursesBlock = ({ data, courses }) => {
               <div className={styles.CoursesBlockFirstColumnLinks}>
                 {courses.map((link) => {
                   if (link.idcourse !== 0)
-                    return <CoursLink key={link.idcourse} data={link} />
+                    return <CoursLink key={link.idcourse} data={link} />;
                 })}
               </div>
             </div>
@@ -27,6 +28,6 @@ const CoursesBlock = ({ data, courses }) => {
         </div>
       </div>
     </>
-  )
-}
-export default CoursesBlock
+  );
+};
+export default CoursesBlock;
