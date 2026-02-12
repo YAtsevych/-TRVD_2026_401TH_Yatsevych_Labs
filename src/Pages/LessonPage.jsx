@@ -36,7 +36,7 @@ const LessonPage = () => {
     vocabular: LessonPageVocabular,
     grammar: LessonPageGrammar,
     reading: LessonPageReading,
-    listening: LessonPageListening,
+    listening: LessonPageReading,
   }
   const Component =
     slug === 'skills'
