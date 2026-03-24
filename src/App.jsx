@@ -1,18 +1,20 @@
-import Layout from './components/StaticComp/layout/Layout.jsx'
-import Home from './Pages/Home.jsx'
-import { Routes, Route, Link } from 'react-router-dom'
-import MainPages from './Pages/MainPages.jsx'
-import CoursePage from './Pages/CoursePages.jsx'
-import Registration from './Pages/Registration.jsx'
-import LessonPage from './Pages/LessonPage.jsx'
-import React from 'react'
-import ScrollToTop from './resoures/ScrollTop.jsx'
+import Layout from "./components/StaticComp/layout/Layout.jsx";
+import Home from "./Pages/Home.jsx";
+import { Routes, Route, Link } from "react-router-dom";
+import MainPages from "./Pages/MainPages.jsx";
+import CoursePage from "./Pages/CoursePages.jsx";
+import Registration from "./Pages/Registration.jsx";
+import Login from "./Pages/Login.jsx";
+import LessonPage from "./Pages/LessonPage.jsx";
+import React from "react";
+import ScrollToTop from "./resoures/ScrollTop.jsx";
 function App() {
   return (
     <>
       <ScrollToTop />
       <Routes>
         <Route path="/registration" element={<Registration />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
 
@@ -22,7 +24,7 @@ function App() {
         </Route>
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import styles from "./style.module.css";
-import { Register } from "./RegistrotionFunc";
+import { LoginFunction } from "./LoginFunc";
 import React from "react";
-const Registration = (params) => {
+const Login = (params) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -11,9 +12,11 @@ const Registration = (params) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await Register(email, password);
+      const data = await LoginFunction(email, password);
+
       console.log(data);
       setMessage(data.message + " " + data.userId);
+      navigate("/");
     } catch (err) {
       setError(err.message);
     }
@@ -24,9 +27,10 @@ const Registration = (params) => {
         <Link to="/">
           <div className={styles.logo}></div>
         </Link>
-        <h1 className={styles.RegTitle}>Create an Account</h1>
+        <h1 className={styles.RegTitle}>Welcome Back</h1>
         <p className={styles.RegDescription}>
-          Join the British Council to access our courses, exams, and resources.
+          Log in to your British Council account to continue your learning
+          journey
         </p>
 
         <form className={styles.formRegLog} onSubmit={handleSubmit}>
@@ -61,18 +65,19 @@ const Registration = (params) => {
             }}
           />
 
-          <input type="submit" value="Sign Up" className={styles.formSubmit} />
+          <input type="submit" value="Log In" className={styles.formSubmit} />
           {message && (
             <p className={`${styles.formAlert} ${styles.good}`}>{message}</p>
           )}
           {error && <p className={styles.formAlert}>{error}</p>}
         </form>
         <p className={styles.RegDescription}>
-          Already have an account? <Link to="/login">Log in</Link>.
+          Don't have an account? Create one
+          <Link to="/registration"> here</Link>?
         </p>
       </div>
     </div>
   );
 };
 
-export default Registration;
+export default Login;

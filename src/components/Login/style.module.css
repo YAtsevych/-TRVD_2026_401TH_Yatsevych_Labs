@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url("/resoures/img/backgrounds/RegistBackground.jpg");
+  background-image: url('/resoures/img/backgrounds/RegistBackground.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -62,7 +62,7 @@
   text-align: center;
 }
 .logo {
-  background-image: url("/resoures/img/logo/logoBlack.png");
+  background-image: url('/resoures/img/logo/logoBlack.png');
   background-size: cover;
   background-position: center;
   width: 172px;
@@ -84,7 +84,7 @@
   left: 0;
   bottom: 0;
   display: block;
-  content: "";
+  content: '';
   width: 4px;
   height: 100%;
   background-color: #ea0034;
@@ -95,7 +95,7 @@
   left: 0;
   bottom: 0;
   display: block;
-  content: "";
+  content: '';
   width: 4px;
   height: 100%;
   background-color: #08da3d;

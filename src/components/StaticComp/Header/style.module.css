@@ -69,6 +69,7 @@
   text-decoration: none;
   font-weight: 600;
   transition: background-color 0.2s ease-in-out;
+  margin-left: 8px;
 }
 
 .loginButton:hover {
